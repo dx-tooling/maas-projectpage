@@ -1,5 +1,18 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const glob = require("glob");
+
+// Find all HTML files in src directory and its subdirectories
+const htmlFiles = glob.sync("./src/**/*.html");
+
+// Create an HtmlWebpackPlugin instance for each HTML file found
+const htmlPlugins = htmlFiles.map((file) => {
+    return new HtmlWebpackPlugin({
+        template: file,
+        // Calculate relative path for filename based on src directory
+        filename: path.relative("src", file),
+    });
+});
 
 module.exports = {
     entry: "./src/index.ts",
@@ -21,10 +34,5 @@ module.exports = {
         clean: true,
         publicPath: "auto",
     },
-    plugins: [
-        new HtmlWebpackPlugin({
-            template: "./src/styleguide/index.html",
-            filename: "styleguide/index.html",
-        }),
-    ],
+    plugins: [...htmlPlugins],
 };
