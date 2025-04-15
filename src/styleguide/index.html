@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Living Styleguide</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+<div data-controller="styleguide--modal">
+    <button data-styleguide--modal-target="button" data-action="click->styleguide--modal#open">Open Modal</button>
+
+    <!-- Simple Modal Structure -->
+    <div data-styleguide--modal-target="modal" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border: 1px solid black; z-index: 1000;">
+        <h2>Modal Title</h2>
+        <p>This is the modal content.</p>
+        <button data-action="click->styleguide--modal#close">Close Modal</button>
+    </div>
+</div>
+
+<!-- The script tag will be injected by HtmlWebpackPlugin -->
+</body>
