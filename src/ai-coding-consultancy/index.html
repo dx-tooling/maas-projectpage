@@ -86,7 +86,7 @@
 
     <!-- Problem/Solution Section -->
     <section class="mt-32 mb-16 grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-        <div>
+        <div> <!-- Left Column: Problem -->
             <h2 class="text-3xl font-bold mb-4 text-gray-800 dark:text-gray-200">Is Your Team Hesitant About AI Coding Tools?</h2>
             <p class="text-gray-700 dark:text-gray-400 leading-relaxed mb-4">You know AI can boost productivity, but concerns about code quality, loss of control, and integrating it effectively are holding you back. You need a way to harness AI's power without disrupting your team's established, high-quality practices.</p>
             <ul class="list-none space-y-2 text-gray-700 dark:text-gray-300 mb-6">
@@ -107,21 +107,32 @@
                     <span>Wasting time on ineffective prompts and rework.</span>
                 </li>
             </ul>
-            <img
-                src="../static/images/headway-5QgIuuBxKwM-unsplash_1920x1280.jpg"
-                alt="A focused developer working intensely on a laptop, representing common coding challenges."
-                class="rounded-lg shadow-lg object-cover w-full h-auto max-h-[350px] md:max-h-[450px] mt-32"
-                loading="lazy"
-            >
-        </div>
-        <div>
+
+            <!-- Solution Image (Visible on Small Screens Only) -->
             <img
                 src="../static/images/charlesdeluvio-Lks7vei-eAg-unsplash_1920x1280.jpg"
                 alt="Two colleagues discussing work collaboratively on a laptop in a modern office setting."
-                class="rounded-lg shadow-lg object-cover w-full h-auto max-h-[350px] md:max-h-[450px] mb-6"
+                class="block md:hidden rounded-lg shadow-lg object-cover w-full h-auto max-h-[350px] mt-6 mb-6"
                 loading="lazy"
             >
-            <h3 class="text-2xl font-semibold mb-3 text-indigo-800 dark:text-indigo-200 mt-32">
+
+            <!-- Problem Image (Visible on Medium Screens Up Only) -->
+            <img
+                src="../static/images/headway-5QgIuuBxKwM-unsplash_1920x1280.jpg"
+                alt="A focused developer working intensely on a laptop, representing common coding challenges."
+                class="hidden md:block rounded-lg shadow-lg object-cover w-full h-auto max-h-[350px] md:max-h-[450px] mt-32"
+                loading="lazy"
+            >
+        </div>
+        <div> <!-- Right Column: Solution -->
+            <!-- Solution Image (Visible on Medium Screens Up Only) -->
+            <img
+                src="../static/images/charlesdeluvio-Lks7vei-eAg-unsplash_1920x1280.jpg"
+                alt="Two colleagues discussing work collaboratively on a laptop in a modern office setting."
+                class="hidden md:block rounded-lg shadow-lg object-cover w-full h-auto max-h-[350px] md:max-h-[450px] mb-6"
+                loading="lazy"
+            >
+            <h3 class="text-2xl font-semibold mb-3 text-indigo-800 dark:text-indigo-200 mt-8 md:mt-32">
                 Our solution:<br>
                 Leverage Experience, Amplify AI
             </h3>
@@ -131,6 +142,14 @@
                 <li class="flex items-start"><svg class="h-5 w-5 text-green-500 mr-2 shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span>Implementing <strong class="font-semibold">tool-based guard rails</strong> (linters, tests, type checkers) for automated quality control.</span></li>
                 <li class="flex items-start"><svg class="h-5 w-5 text-green-500 mr-2 shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span>Using <strong class="font-semibold">file-based keyframing</strong> to maintain architectural integrity.</span></li>
              </ul>
+
+            <!-- Problem Image (Visible on Small Screens Only) -->
+             <img
+                src="../static/images/headway-5QgIuuBxKwM-unsplash_1920x1280.jpg"
+                alt="A focused developer working intensely on a laptop, representing common coding challenges."
+                class="block md:hidden rounded-lg shadow-lg object-cover w-full h-auto max-h-[350px] mt-6"
+                loading="lazy"
+            >
         </div>
     </section>
 
