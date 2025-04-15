@@ -3,7 +3,6 @@ import { definitionsFromContext } from "@hotwired/stimulus-webpack-helpers";
 
 // Import global styles
 import "./styles/main.css";
-import "./styles/ai-coding-consultancy.css";
 
 // Initialize Stimulus
 const application = Application.start();
