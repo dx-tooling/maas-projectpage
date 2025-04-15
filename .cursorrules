@@ -9,12 +9,16 @@
 
 ### Build Process
 
--   **Bundler:** Webpack handles TypeScript compilation and HTML processing.
+-   **Bundler:** Webpack handles TypeScript compilation, CSS processing (Tailwind/PostCSS), and HTML processing.
 -   **Build Command:** Use `npm run build` for development builds and `npm run build:prod` for production builds.
 -   **Output:** Compiled assets are placed in the `dist/` directory.
--   **HTML Processing:** All `.html` files within the `src/` directory are automatically found (using `glob`) and processed by `html-webpack-plugin`.
--   **Output Structure:** The directory structure within `src/` is mirrored in `dist/` for HTML files.
--   **Asset Paths:** Relative paths are used for assets (like the JavaScript bundle) in the generated HTML (`publicPath: 'auto'`).
+-   **HTML Processing:** 
+    -   All non-partial `.html` files within `src/` are automatically found (`glob`) and processed by `html-webpack-plugin`.
+    -   `posthtml-loader` with `posthtml-include` is used *before* `html-loader` to handle `<include src="..."></include>` tags for HTML partials.
+    -   Partials should reside in `src/partials/` and are excluded from direct `HtmlWebpackPlugin` processing.
+-   **Output Structure:** The directory structure within `src/` (for non-partial HTML) is mirrored in `dist/`.
+-   **CSS Processing:** Tailwind CSS is processed via `@tailwindcss/postcss` configured in `postcss.config.js`. CSS is extracted to `dist/styles/main.css` using `mini-css-extract-plugin`.
+-   **Asset Paths:** Relative paths are used for assets (JS bundle, CSS files) in the generated HTML (`output.publicPath: 'auto'`).
 -   **Clean Build:** The `dist/` directory is cleaned before each build (`output.clean: true`).
 -   **JS Target:** TypeScript is compiled to `es2017` (defined in `tsconfig.json`).
 
@@ -25,14 +29,26 @@
 -   **Controller Naming:** Follow the standard Stimulus naming convention based on the file path relative to `src/controllers/`. For a controller at `src/controllers/folder/modal_controller.ts`, the identifier is `folder--modal` (used as `data-controller="folder--modal"`). This mapping is handled by `@hotwired/stimulus-webpack-helpers`.
 -   **Global Access:** Access the Stimulus application instance via `window.Stimulus`. A global type declaration (`src/types/global.d.ts`) ensures TypeScript recognizes this.
 
+### Styling & UI Features
+
+-   **Styling:** Use Tailwind CSS v4 utility classes.
+-   **Theme (Dark/Light Mode):**
+    -   Enabled via `darkMode: 'class'` in `tailwind.config.js`.
+    -   An inline script (`src/partials/theme-fouc-guard.html`, included via `<include>`) runs in the `<head>` to apply the correct theme class (`dark`) to `<html>` immediately, preventing FOUC.
+    -   The script checks `localStorage` for a `theme` key ('dark' or 'light').
+    -   If no `theme` key exists, it falls back to the user's OS preference (`prefers-color-scheme`).
+    -   A Stimulus controller (`src/controllers/theme_controller.ts`) manages the toggle button, updates `localStorage`, and updates the button's text.
+
 ### Environment
 
 -   **Node.js Version:** Use the Node.js version specified in the `.nvmrc` file. Run `nvm use` in the project root to activate the correct version.
 
 ### File Structure
 
--   `src/`: Contains all source code (`.ts`, `.html`).
+-   `src/`: Contains all source code (`.ts`, `.html`, `.css`).
     -   `src/controllers/`: Contains Stimulus controller files.
+    -   `src/partials/`: Contains reusable HTML partials (e.g., `theme-fouc-guard.html`).
+    -   `src/styles/`: Contains source CSS files (e.g., `main.css`).
     -   `src/types/`: Contains custom TypeScript declaration files (e.g., `global.d.ts`).
--   `dist/`: Contains the compiled output, mirroring the structure of `src/` for HTML files.
--   **Root:** Configuration files (`package.json`, `webpack.config.js`, `tsconfig.json`, `eslint.config.mjs`, `.nvmrc`, `.prettierrc` - if added, etc.) reside at the project root.
+-   `dist/`: Contains the compiled output, mirroring the structure of `src/` for non-partial HTML files.
+-   **Root:** Configuration files (`package.json`, `webpack.config.js`, `tsconfig.json`, `tailwind.config.js`, `postcss.config.js`, `eslint.config.mjs`, `.nvmrc`, `.cursorrules`, etc.) reside at the project root.
