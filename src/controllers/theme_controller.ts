@@ -11,8 +11,10 @@ export default class extends Controller {
     }
 
     toggle() {
-        const currentTheme = localStorage.getItem("theme");
-        const newTheme = currentTheme === "dark" ? "light" : "dark";
+        // Determine the *new* theme based on the *current* visual state
+        const isCurrentlyDark = document.documentElement.classList.contains("dark");
+        const newTheme = isCurrentlyDark ? "light" : "dark";
+
         localStorage.setItem("theme", newTheme);
         this.applyTheme(newTheme);
     }

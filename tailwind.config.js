@@ -1,9 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     darkMode: "class",
-    content: ["./src/**/*.html", "./src/**/*.ts"],
+    content: ["./src/**/*.{html,js,ts}"],
     theme: {
-        extend: {},
+        extend: {
+            // Remove the backgroundImage extension
+        },
     },
-    plugins: [require("@tailwindcss/forms")],
+    plugins: [],
 };

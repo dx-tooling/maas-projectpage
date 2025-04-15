@@ -38,7 +38,22 @@ module.exports = (env, argv) => {
                 },
                 {
                     test: /\.css$/i,
-                    use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
+                    use: [
+                        MiniCssExtractPlugin.loader,
+                        {
+                            loader: "css-loader",
+                            options: {
+                                // url: true, // Re-enable url processing (default)
+                                sourceMap: !isProduction, // Keep source maps consistent
+                            },
+                        },
+                        {
+                            loader: "postcss-loader",
+                            options: {
+                                sourceMap: !isProduction, // Keep source maps consistent
+                            },
+                        },
+                    ],
                 },
                 {
                     test: /\.html$/i,
@@ -59,6 +74,14 @@ module.exports = (env, argv) => {
                             },
                         },
                     ],
+                },
+                {
+                    // Add rule for images using Asset Modules
+                    test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                    type: "asset/resource",
+                    generator: {
+                        filename: "images/[name][ext]", // Output path for images
+                    },
                 },
             ],
         },
