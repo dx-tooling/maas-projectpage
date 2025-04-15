@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const glob = require("glob");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 // Find all HTML files in src directory and its subdirectories
 const htmlFiles = glob.sync("./src/**/*.html");
@@ -23,10 +24,14 @@ module.exports = {
                 use: "ts-loader",
                 exclude: /node_modules/,
             },
+            {
+                test: /\.css$/i,
+                use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
+            },
         ],
     },
     resolve: {
-        extensions: [".tsx", ".ts", ".js"],
+        extensions: [".tsx", ".ts", ".js", ".css"],
     },
     output: {
         filename: "bundle.js",
@@ -34,5 +39,10 @@ module.exports = {
         clean: true,
         publicPath: "auto",
     },
-    plugins: [...htmlPlugins],
+    plugins: [
+        ...htmlPlugins,
+        new MiniCssExtractPlugin({
+            filename: "styles/[name].css",
+        }),
+    ],
 };

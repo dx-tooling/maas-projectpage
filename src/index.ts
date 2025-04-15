@@ -1,5 +1,6 @@
 import { Application } from "@hotwired/stimulus";
 import { definitionsFromContext } from "@hotwired/stimulus-webpack-helpers";
+import "./styles/main.css"; // Import the main CSS file
 
 window.Stimulus = Application.start();
 

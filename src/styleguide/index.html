@@ -1,23 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full bg-gray-100">
 
 <head>
     <title>Living Styleguide</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Link to CSS will be injected here by HtmlWebpackPlugin -->
 </head>
 
-<body>
-<div data-controller="styleguide--modal">
-    <button data-styleguide--modal-target="button" data-action="click->styleguide--modal#open">Open Modal</button>
+<body class="h-full p-8 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-200">
+
+<div data-controller="theme" class="mb-4">
+    <button 
+        data-theme-target="toggleButton" 
+        data-action="click->theme#toggle"
+        class="px-4 py-2 font-semibold text-white bg-purple-600 rounded hover:bg-purple-800 dark:bg-indigo-600 dark:hover:bg-indigo-800"
+    >
+        <!-- Text set by controller -->
+    </button>
+</div>
+
+<div data-controller="styleguide--modal" class="space-y-4">
+    <button 
+        data-styleguide--modal-target="button" 
+        data-action="click->styleguide--modal#open"
+        class="px-4 py-2 font-semibold text-white bg-blue-500 rounded hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-900"
+    >
+        Open Modal
+    </button>
 
     <!-- Simple Modal Structure -->
-    <div data-styleguide--modal-target="modal" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border: 1px solid black; z-index: 1000;">
-        <h2>Modal Title</h2>
-        <p>This is the modal content.</p>
-        <button data-action="click->styleguide--modal#close">Close Modal</button>
+    <div 
+        data-styleguide--modal-target="modal" 
+        class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50"
+        style="display: none;" <!-- Keep initial hide style -->
+    >
+        <div class="w-full max-w-md p-6 bg-white dark:bg-gray-800 rounded-lg shadow-xl">
+            <h2 class="text-xl font-bold mb-4 text-gray-900 dark:text-gray-100">Modal Title</h2>
+            <p class="mb-4 text-gray-700 dark:text-gray-300">This is the modal content.</p>
+            <button 
+                data-action="click->styleguide--modal#close"
+                class="px-4 py-2 font-semibold text-white bg-red-500 rounded hover:bg-red-700 dark:bg-red-700 dark:hover:bg-red-900"
+            >
+                Close Modal
+            </button>
+        </div>
     </div>
 </div>
 
 <!-- The script tag will be injected by HtmlWebpackPlugin -->
 </body>
+
+</html>
