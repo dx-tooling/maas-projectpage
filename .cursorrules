@@ -3,24 +3,35 @@
 ### Code Style & Quality
 
 -   **Formatting:** Use Prettier. Run `npm run prettier:fix` to format code automatically.
--   **Linting:** Use ESLint. Run `npm run lint` to check for code quality issues.
--   **Combined Check:** Run `npm run quality` to execute both Prettier and ESLint.
+-   **Linting:** 
+    -   Run `npm run lint:eslint` for ESLint checks (style, patterns).
+    -   Run `npm run lint:types` for TypeScript type checking (`tsc --noEmit`).
+    -   Run `npm run lint` for both.
+-   **Testing:**
+    -   Use Jest with `ts-jest` and `jest-environment-jsdom`.
+    -   Test files should be located in the `tests/` directory and follow the `*.test.ts` pattern.
+    -   Run tests using `npm test`.
+-   **Combined Check:** Run `npm run quality` to execute Prettier, Linters (ESLint + TSC), and Tests.
 -   **TypeScript:** Adhere to TypeScript best practices. Avoid `any` types where possible. Ensure type declarations are accurate.
 
 ### Build Process
 
 -   **Bundler:** Webpack handles TypeScript compilation, CSS processing (Tailwind/PostCSS), and HTML processing.
--   **Build Command:** Use `npm run build` for development builds and `npm run build:prod` for production builds.
+-   **Build Command:** 
+    -   Use `npm run build` for development builds (includes source maps).
+    -   Use `npm run build:prod` for production builds (no source maps, content hashes in filenames).
 -   **Output:** Compiled assets are placed in the `dist/` directory.
 -   **HTML Processing:** 
     -   All non-partial `.html` files within `src/` are automatically found (`glob`) and processed by `html-webpack-plugin`.
     -   `posthtml-loader` with `posthtml-include` is used *before* `html-loader` to handle `<include src="..."></include>` tags for HTML partials.
     -   Partials should reside in `src/partials/` and are excluded from direct `HtmlWebpackPlugin` processing.
+    -   HTML minification is disabled via `HtmlWebpackPlugin` config.
 -   **Output Structure:** The directory structure within `src/` (for non-partial HTML) is mirrored in `dist/`.
--   **CSS Processing:** Tailwind CSS is processed via `@tailwindcss/postcss` configured in `postcss.config.js`. CSS is extracted to `dist/styles/main.css` using `mini-css-extract-plugin`.
+-   **CSS Processing:** Tailwind CSS is processed via `@tailwindcss/postcss` configured in `postcss.config.js`. CSS is extracted to `dist/styles/[name].[contenthash].css` (production) or `dist/styles/[name].css` (development) using `mini-css-extract-plugin`.
+-   **JS Processing:** TypeScript is compiled to `bundle.[contenthash].js` (production) or `bundle.js` (development).
 -   **Asset Paths:** Relative paths are used for assets (JS bundle, CSS files) in the generated HTML (`output.publicPath: 'auto'`).
 -   **Clean Build:** The `dist/` directory is cleaned before each build (`output.clean: true`).
--   **JS Target:** TypeScript is compiled to `es2017` (defined in `tsconfig.json`).
+-   **JS Target:** TypeScript is compiled to `es2017` (defined in `tsconfig.json`), using `module: node16` and `moduleResolution: node16`.
 
 ### JavaScript Framework (Stimulus)
 
@@ -34,6 +45,7 @@
 -   **Styling:** Use Tailwind CSS v4 utility classes.
 -   **Theme (Dark/Light Mode):**
     -   Enabled via `darkMode: 'class'` in `tailwind.config.js`.
+    -   `@custom-variant dark (&:where(.dark, .dark *));` added to `main.css` (if needed by specific Tailwind/PostCSS versions).
     -   An inline script (`src/partials/theme-fouc-guard.html`, included via `<include>`) runs in the `<head>` to apply the correct theme class (`dark`) to `<html>` immediately, preventing FOUC.
     -   The script checks `localStorage` for a `theme` key ('dark' or 'light').
     -   If no `theme` key exists, it falls back to the user's OS preference (`prefers-color-scheme`).
@@ -50,5 +62,7 @@
     -   `src/partials/`: Contains reusable HTML partials (e.g., `theme-fouc-guard.html`).
     -   `src/styles/`: Contains source CSS files (e.g., `main.css`).
     -   `src/types/`: Contains custom TypeScript declaration files (e.g., `global.d.ts`).
+-   `tests/`: Contains Jest test files (`*.test.ts`).
+    -   `tests/controllers/`: Contains tests for Stimulus controllers.
 -   `dist/`: Contains the compiled output, mirroring the structure of `src/` for non-partial HTML files.
--   **Root:** Configuration files (`package.json`, `webpack.config.js`, `tsconfig.json`, `tailwind.config.js`, `postcss.config.js`, `eslint.config.mjs`, `.nvmrc`, `.cursorrules`, etc.) reside at the project root.
+-   **Root:** Configuration files (`package.json`, `webpack.config.js`, `tsconfig.json`, `tailwind.config.js`, `postcss.config.js`, `eslint.config.mjs`, `jest.config.js`, `.nvmrc`, `.cursorrules`, etc.) reside at the project root.
