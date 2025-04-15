@@ -10,8 +10,6 @@ export default class HeroEffectsController extends Controller {
         // rootMargin: "-1px 0px 0px 0px" // Remove rootMargin
     };
     static activeClass = "effects-active";
-    static delayMs = 1000; // Main activation delay for initially visible elements
-    static initDelayMs = 10; // Short delay before starting observation
 
     connect() {
         this.observer = new IntersectionObserver((entries) => {
@@ -24,20 +22,14 @@ export default class HeroEffectsController extends Controller {
             });
         }, HeroEffectsController.intersectionOptions);
 
-        // Wait a very short time before checking visibility and starting observation
-        this.initTimeout = window.setTimeout(() => {
-            const rect = this.element.getBoundingClientRect();
-            const isVisibleInitially = rect.top < window.innerHeight && rect.bottom >= 0;
+        const rect = this.element.getBoundingClientRect();
+        const isVisibleInitially = rect.top < window.innerHeight && rect.bottom >= 0;
 
-            if (isVisibleInitially) {
-                // Set the main delay for activation
-                this.activateTimeout = window.setTimeout(() => {
-                    this.activate();
-                }, HeroEffectsController.delayMs);
-            }
-            // Start observing AFTER the initial visibility check and potential timeout setup
-            this.observer?.observe(this.element);
-        }, HeroEffectsController.initDelayMs);
+        if (isVisibleInitially) {
+            this.activate();
+        }
+        // Start observing AFTER the initial visibility check and potential timeout setup
+        this.observer?.observe(this.element);
     }
 
     disconnect() {
