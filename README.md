@@ -48,7 +48,7 @@ Essentially, it's a *text-to-landingpage* starter kit. Just open the project in 
     nvm use
     ```
     *(You'll need to run `nvm use` in each new terminal session you open for this project).*
-3.  **Install Dependencies:** Install the necessary development tools. We use `--no-save` because this is a template; you'll manage your own dependencies if you fork or customize significantly.
+3.  **Install Dependencies:** Install the necessary development tools:
     ```bash
     npm install --no-save
     ```
@@ -129,7 +129,7 @@ You can also work conventionally:
 
 *   `npm run build`: Creates a development build in `dist/` (includes source maps).
 *   `npm run build:prod`: Creates an optimized production build in `dist/` (minified, no source maps, content hashes in filenames).
-*   `npm run quality`: Runs Prettier formatting check, ESLint, TypeScript type checking, and Jest tests.
+*   `npm run quality`: Runs Prettier formatting fixes, ESLint, and TypeScript type checking.
 *   `npm test`: Runs Jest unit tests.
 *   `npm run lint`: Runs ESLint and TypeScript type checking.
 *   `npm run lint:eslint`: Runs ESLint only.
