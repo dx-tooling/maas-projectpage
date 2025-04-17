@@ -30,7 +30,7 @@ Essentially, it's a *text-to-landingpage* starter kit. Just open the project in 
 *   **Dark/Light Mode:** Built-in theme toggling based on user preference and localStorage, with FOUC prevention.
 *   **HTML Partials:** Uses `<include>` tags (`posthtml-include`) for reusable HTML snippets (like headers, footers, theme guard).
 *   **Quality Control:** Pre-configured ESLint, Prettier, and TypeScript checking (`npm run quality`).
-*   **Testing:** Jest setup for unit/integration tests (primarily for Stimulus controllers).
+*   **Testing:** Jest setup for unit/integration tests (primarily for Stimulus controllers — `npm run test`).
 *   **Optimized Build:** Development (`npm run build`) and production (`npm run build:prod`) builds configured.
 
 ## Getting Started
