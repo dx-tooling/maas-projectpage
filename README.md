@@ -9,6 +9,8 @@ Essentially, it's a *text-to-landingpage* starter kit. Just open the project in 
 
 **The Goal:** Bridge the gap between the ease of AI-driven development ("text-to-landingpage") and the need for full control over clean, static, zero-dependency HTML/CSS/JS output.
 
+![Screenshot of the Living Styleguide and Example Landing Page](http://manuel.kiessling.net/landingpages-ai-template/assets/main-screenshot-3840x1559.jpg)
+
 **Who is this for?**
 *   Developers, marketers, or designers who want to quickly generate landing pages using AI tools.
 *   Users who value having complete control over the final static code output.
@@ -104,6 +106,10 @@ This project is designed to work seamlessly with AI coding assistants like **Cur
 
     Ensure all copied components use the correct CSS classes as defined in the styleguide and the overall structure is valid HTML5.
     ```
+
+    **Example workflow in Cursor AI Code Agent:**
+
+    ![Screenshot of Cursor AI with prompt example](http://manuel.kiessling.net/landingpages-ai-template/assets/cursor-screenshot-1920x1529.png)
 
 **Why `nvm use` before `npm` commands?** The project's build tools and linters might depend on the specific Node.js version defined in `.nvmrc`. Running `nvm use` ensures the correct version is active before executing `npm` scripts.
 
