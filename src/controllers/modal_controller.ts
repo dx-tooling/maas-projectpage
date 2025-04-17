@@ -4,21 +4,24 @@ export default class extends Controller {
     static targets = ["modal", "button"];
 
     declare readonly modalTarget: HTMLElement;
-    declare readonly buttonTarget: HTMLElement;
 
     connect() {
-        console.log("Modal controller connected!");
-        // Initially hide the modal
         this.modalTarget.style.display = "none";
     }
 
     open() {
-        console.log("Opening modal");
         this.modalTarget.style.display = "block";
     }
 
     close() {
-        console.log("Closing modal");
         this.modalTarget.style.display = "none";
+    }
+
+    closeBackground(event: MouseEvent) {
+        // If the click target is the modal container itself (the backdrop),
+        // and not one of its children (like the modal panel), then close.
+        if (event.target === this.modalTarget) {
+            this.close();
+        }
     }
 }

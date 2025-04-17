@@ -8,6 +8,7 @@
         "allowJs": true,
         "esModuleInterop": true,
         "moduleResolution": "node16",
+        "isolatedModules": true,
         "types": ["webpack-env", "jest"]
     }
 }

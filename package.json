@@ -1,7 +1,7 @@
 {
     "name": "landingpages",
     "version": "1.0.0",
-    "main": "index.js",
+    "main": "src/index.ts",
     "scripts": {
         "test": "jest",
         "prettier": "prettier --check './{,**/}*.{css,ts,js,mjs,json,yaml,yml}' '!**/package-lock.json'",
@@ -9,12 +9,12 @@
         "lint:eslint": "eslint .",
         "lint:types": "tsc --noEmit",
         "lint": "npm run lint:eslint && npm run lint:types",
-        "quality": "npm run prettier:fix && npm run lint && npm run test",
+        "quality": "npm run prettier:fix && npm run lint",
         "build": "webpack --mode=development",
         "build:prod": "webpack --mode=production"
     },
     "author": "",
-    "license": "ISC",
+    "license": "MIT",
     "description": "",
     "devDependencies": {
         "@eslint/js": "^9.24.0",

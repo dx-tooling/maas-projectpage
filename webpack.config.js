@@ -2,7 +2,6 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const glob = require("glob");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CopyPlugin = require("copy-webpack-plugin");
 
 // Function to generate the config based on environment
 module.exports = (env, argv) => {
@@ -101,16 +100,6 @@ module.exports = (env, argv) => {
             new MiniCssExtractPlugin({
                 // Use contenthash for production builds, simple name for development
                 filename: isProduction ? "styles/[name].[contenthash].css" : "styles/[name].css",
-            }),
-            new CopyPlugin({
-                patterns: [
-                    {
-                        from: "src/ai-coding-consultancy/handle-email-form.php",
-                        to: "ai-coding-consultancy/handle-email-form.php", // Relative to output.path ('dist')
-                    },
-                    // Add other patterns here if needed, e.g., for static assets
-                    // { from: "src/images", to: "images" }
-                ],
             }),
         ],
         // Optional: Add optimization settings for production

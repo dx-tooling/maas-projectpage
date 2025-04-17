@@ -39,7 +39,5 @@ export default class extends Controller {
             this.toggleButtonTarget.textContent =
                 effectiveTheme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode";
         }
-
-        console.log(`Applied theme: ${effectiveTheme}`);
     }
 }
