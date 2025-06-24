@@ -17,36 +17,51 @@
     <!-- Link to main CSS will be injected here by HtmlWebpackPlugin -->
 </head>
 
-<body class="h-full bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-200 overflow-x-hidden">
+<body class="h-full bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-200 overflow-x-hidden bg-pattern-dots">
 
 <include src="partials/theme-switcher.html"></include>
 
-<div class="relative">
-    <!-- Hero Section -->
-    <div class="relative overflow-hidden bg-gradient-to-b from-blue-50 to-white dark:from-gray-900 dark:to-gray-800 py-24 sm:py-32">
-        <div class="mx-auto max-w-7xl px-6 lg:px-8">
-            <div class="mx-auto max-w-2xl text-center">
-                <h1 class="text-4xl md:text-5xl font-extrabold mb-4 bg-gradient-to-r from-blue-600 to-purple-700 bg-clip-text text-transparent">
+<div class="relative" data-controller="scroll-animations">
+    <!-- Premium Hero Section -->
+    <div class="relative overflow-hidden bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-blue-900/20 dark:to-purple-900/20 py-32 sm:py-40 gradient-shift">
+        <!-- Animated Background Elements -->
+        <div class="absolute inset-0 bg-pattern-grid opacity-30"></div>
+        <div class="absolute top-10 left-10 w-72 h-72 bg-blue-400/20 rounded-full blur-3xl float-animation"></div>
+        <div class="absolute bottom-10 right-10 w-96 h-96 bg-purple-400/20 rounded-full blur-3xl float-animation" style="animation-delay: -3s;"></div>
+        
+        <div class="relative mx-auto max-w-7xl px-6 lg:px-8">
+            <div class="mx-auto max-w-4xl text-center">
+                <h1 class="text-6xl md:text-7xl lg:text-8xl font-extrabold mb-8 text-gradient-premium heading-premium scroll-animate" data-scroll-animations-target="animate">
                     Playwright MCP Cloud
                 </h1>
-                <p class="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300">
+                <p class="mt-8 text-xl md:text-2xl leading-relaxed text-gray-600 dark:text-gray-300 text-premium scroll-animate" data-scroll-animations-target="animate">
                     Deploy Playwright MCP Servers in the cloud with zero setup. Enable AI agents to control real browsers with full visual feedback through VNC.
                 </p>
-                <div class="mt-10 flex items-center justify-center gap-x-6">
-                    <a href="https://app.mcp-as-a-service.com/account/mcp-instances" class="px-8 py-4 font-bold text-lg text-white bg-blue-600 rounded-md shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-offset-gray-800 transition duration-150 ease-in-out cursor-pointer">Deploy MCP Server</a>
-                    <a href="about.html" class="px-8 py-4 font-bold text-lg text-blue-700 bg-white rounded-md shadow-lg hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:bg-gray-100 dark:text-blue-900 dark:hover:bg-gray-200 transition duration-150 ease-in-out cursor-pointer">Learn more <span class="inline-block ml-1">→</span></a>
+                <div class="mt-12 flex flex-col sm:flex-row items-center justify-center gap-6 scroll-animate" data-scroll-animations-target="animate">
+                    <a href="https://app.mcp-as-a-service.com/account/mcp-instances" 
+                       class="btn-premium px-10 py-5 font-bold text-xl text-white bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 rounded-xl shadow-premium hover:shadow-2xl focus-premium transform hover:scale-105 transition-all duration-300 ease-out glow-pulse">
+                        Deploy MCP Server
+                    </a>
+                    <a href="about.html" 
+                       class="btn-premium px-10 py-5 font-bold text-xl text-blue-700 glass-card shadow-premium hover:shadow-xl focus-premium transform hover:scale-105 transition-all duration-300 ease-out dark:text-blue-300">
+                        Learn more <span class="inline-block ml-2 transform group-hover:translate-x-1 transition-transform duration-300">→</span>
+                    </a>
                 </div>
-                <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">Launching an MCP Server takes less than 10 seconds.</p>
+                <p class="mt-6 text-sm text-gray-500 dark:text-gray-400 scroll-animate" data-scroll-animations-target="animate">
+                    ⚡ Launching an MCP Server takes less than 10 seconds.
+                </p>
             </div>
         </div>
     </div>
-    <!-- Video Demo Section -->
-    <div class="py-24 sm:py-32 bg-gray-50 dark:bg-gray-900/50">
-        <div class="mx-auto max-w-7xl px-6 lg:px-8">
-            <div class="mx-auto max-w-4xl">
-                <div class="aspect-video w-full overflow-hidden rounded-lg shadow-2xl ring-1 ring-gray-900/10 dark:ring-gray-100/10">
+
+    <!-- Premium Video Demo Section -->
+    <div class="py-32 sm:py-40 bg-gray-50 dark:bg-gray-900/50 relative">
+        <div class="absolute inset-0 bg-pattern-dots opacity-20"></div>
+        <div class="relative mx-auto max-w-7xl px-6 lg:px-8">
+            <div class="mx-auto max-w-5xl">
+                <div class="video-container aspect-video w-full overflow-hidden rounded-2xl shadow-premium scroll-animate" data-scroll-animations-target="animate">
                     <video
-                        class="w-full h-full object-cover"
+                        class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700 ease-out"
                         autoplay
                         muted
                         playsinline
@@ -63,41 +78,45 @@
             </div>
         </div>
     </div>
-    <!-- Features Section -->
-    <div id="features" class="py-24 sm:py-32">
-        <div class="mx-auto max-w-7xl px-6 lg:px-8">
-            <div class="mx-auto max-w-2xl text-center">
-                <h2 class="text-3xl font-bold mb-4 text-gray-800 dark:text-gray-200">AI-Powered Browser Control</h2>
-                <p class="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300">
-                    Our cloud-based <a href="https://playwright.dev/" target="_blank" class="text-blue-600 dark:text-blue-400 underline">Playwright</a> MCP Server provides the perfect tool for AI agents to interact with real browsers, enabling realistic web automation and interaction.
+
+    <!-- Premium Features Section -->
+    <div id="features" class="py-32 sm:py-40 relative">
+        <div class="absolute inset-0 bg-gradient-to-br from-white to-blue-50/50 dark:from-gray-900 dark:to-blue-900/10"></div>
+        <div class="relative mx-auto max-w-7xl px-6 lg:px-8">
+            <div class="mx-auto max-w-3xl text-center mb-20">
+                <h2 class="text-5xl md:text-6xl font-extrabold mb-8 text-gradient-premium heading-premium scroll-animate" data-scroll-animations-target="animate">
+                    AI-Powered Browser Control
+                </h2>
+                <p class="text-xl md:text-2xl leading-relaxed text-gray-600 dark:text-gray-300 text-premium scroll-animate" data-scroll-animations-target="animate">
+                    Our cloud-based <a href="https://playwright.dev/" target="_blank" class="text-blue-600 dark:text-blue-400 underline hover:text-blue-800 dark:hover:text-blue-200 transition-colors">Playwright</a> MCP Server provides the perfect tool for AI agents to interact with real browsers, enabling realistic web automation and interaction.
                 </p>
             </div>
-            <div class="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
-                <dl class="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
-                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-                        <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500 dark:bg-blue-600">
-                            <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" /></svg>
+            <div class="mx-auto mt-20 max-w-2xl sm:mt-24 lg:mt-32 lg:max-w-none">
+                <dl class="grid max-w-xl grid-cols-1 gap-12 lg:max-w-none lg:grid-cols-3">
+                    <div class="card-premium glass-card rounded-2xl shadow-premium p-8 text-center scroll-animate" data-scroll-animations-target="animate">
+                        <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 dark:from-blue-600 dark:to-blue-700 mx-auto mb-6 interactive-icon">
+                            <svg class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" /></svg>
                         </div>
-                        <h3 class="mt-4 text-lg font-semibold leading-8 text-gray-900 dark:text-gray-100">Real Browser Control</h3>
-                        <p class="mt-2 text-base leading-7 text-gray-600 dark:text-gray-300">
-                            Deploy a full <a href="https://playwright.dev/" target="_blank" class="text-blue-600 dark:text-blue-400 underline">Playwright</a> MCP Server instance backed by a real Chrome browser. Perfect for AI agents (e.g. in n8n) that need to interact with web applications naturally.
+                        <h3 class="text-2xl font-bold leading-8 text-gray-900 dark:text-gray-100 mb-4">Real Browser Control</h3>
+                        <p class="text-base leading-7 text-gray-600 dark:text-gray-300 text-premium">
+                            Deploy a full <a href="https://playwright.dev/" target="_blank" class="text-blue-600 dark:text-blue-400 underline hover:text-blue-800 dark:hover:text-blue-200 transition-colors">Playwright</a> MCP Server instance backed by a real Chrome browser. Perfect for AI agents (e.g. in n8n) that need to interact with web applications naturally.
                         </p>
                     </div>
-                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-                        <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500 dark:bg-blue-600">
-                            <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V13.5zm0 2.25h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V18zm2.498-6.75h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V13.5zm0 2.25h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V18zm2.504-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zm0 2.25h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V18zm2.498-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zM8.25 6h7.5v2.25h-7.5V6zM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 002.25 2.25h10.5a2.25 2.25 0 002.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0012 2.25z" /></svg>
+                    <div class="card-premium glass-card rounded-2xl shadow-premium p-8 text-center scroll-animate" data-scroll-animations-target="animate">
+                        <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500 to-purple-600 dark:from-purple-600 dark:to-purple-700 mx-auto mb-6 interactive-icon">
+                            <svg class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V13.5zm0 2.25h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V18zm2.498-6.75h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V13.5zm0 2.25h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V18zm2.504-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zm0 2.25h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V18zm2.498-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zM8.25 6h7.5v2.25h-7.5V6zM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 002.25 2.25h10.5a2.25 2.25 0 002.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0012 2.25z" /></svg>
                         </div>
-                        <h3 class="mt-4 text-lg font-semibold leading-8 text-gray-900 dark:text-gray-100">Visual Feedback</h3>
-                        <p class="mt-2 text-base leading-7 text-gray-600 dark:text-gray-300">
+                        <h3 class="text-2xl font-bold leading-8 text-gray-900 dark:text-gray-100 mb-4">Visual Feedback</h3>
+                        <p class="text-base leading-7 text-gray-600 dark:text-gray-300 text-premium">
                             Monitor AI agent interactions in real-time through the integrated VNC client, right in your own browser. See exactly how your AI is interacting with web applications.
                         </p>
                     </div>
-                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-                        <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500 dark:bg-blue-600">
-                            <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" /></svg>
+                    <div class="card-premium glass-card rounded-2xl shadow-premium p-8 text-center scroll-animate" data-scroll-animations-target="animate">
+                        <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-green-500 to-green-600 dark:from-green-600 dark:to-green-700 mx-auto mb-6 interactive-icon">
+                            <svg class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" /></svg>
                         </div>
-                        <h3 class="mt-4 text-lg font-semibold leading-8 text-gray-900 dark:text-gray-100">Secure & Isolated</h3>
-                        <p class="mt-2 text-base leading-7 text-gray-600 dark:text-gray-300">
+                        <h3 class="text-2xl font-bold leading-8 text-gray-900 dark:text-gray-100 mb-4">Secure & Isolated</h3>
+                        <p class="text-base leading-7 text-gray-600 dark:text-gray-300 text-premium">
                             Each MCP Server runs in its own isolated environment with secure access through bearer token authentication.
                         </p>
                     </div>
@@ -105,47 +124,51 @@
             </div>
         </div>
     </div>
-    <!-- How It Works Section -->
-    <div class="bg-gray-50 dark:bg-gray-900/50 py-24 sm:py-32">
-        <div class="mx-auto max-w-7xl px-6 lg:px-8">
-            <div class="mx-auto max-w-2xl text-center">
-                <h2 class="text-3xl font-bold mb-4 text-gray-800 dark:text-gray-200">How It Works</h2>
-                <p class="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300">
+
+    <!-- Premium How It Works Section -->
+    <div class="bg-gradient-to-br from-gray-50 to-blue-50/30 dark:from-gray-900/50 dark:to-blue-900/10 py-32 sm:py-40 relative">
+        <div class="absolute inset-0 bg-pattern-grid opacity-10"></div>
+        <div class="relative mx-auto max-w-7xl px-6 lg:px-8">
+            <div class="mx-auto max-w-3xl text-center mb-20">
+                <h2 class="text-5xl md:text-6xl font-extrabold mb-8 text-gradient-premium heading-premium scroll-animate" data-scroll-animations-target="animate">
+                    How It Works
+                </h2>
+                <p class="text-xl md:text-2xl leading-relaxed text-gray-600 dark:text-gray-300 text-premium scroll-animate" data-scroll-animations-target="animate">
                     Get your AI agent browsing the web in three simple steps
                 </p>
             </div>
-            <div class="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
-                <div class="grid grid-cols-1 gap-y-8 gap-x-6 sm:grid-cols-2 lg:grid-cols-3">
-                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-                        <div class="flex items-center gap-x-4">
-                            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-blue-500 dark:bg-blue-600">
-                                <span class="text-lg font-semibold text-white">1</span>
+            <div class="mx-auto mt-20 max-w-2xl sm:mt-24 lg:mt-32 lg:max-w-none">
+                <div class="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3">
+                    <div class="card-premium glass-card rounded-2xl shadow-premium p-8 scroll-animate" data-scroll-animations-target="animate">
+                        <div class="flex items-center gap-x-6 mb-6">
+                            <div class="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-blue-600 dark:from-blue-600 dark:to-blue-700 interactive-icon">
+                                <span class="text-2xl font-bold text-white">1</span>
                             </div>
-                            <h3 class="text-lg font-semibold leading-8 text-gray-900 dark:text-gray-100">Deploy MCP Server</h3>
+                            <h3 class="text-2xl font-bold leading-8 text-gray-900 dark:text-gray-100">Deploy MCP Server</h3>
                         </div>
-                        <p class="mt-4 text-base leading-7 text-gray-600 dark:text-gray-300">
+                        <p class="text-base leading-7 text-gray-600 dark:text-gray-300 text-premium">
                             Launch a new MCP Server instance with a single click. We'll handle all the setup and browser installation.
                         </p>
                     </div>
-                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-                        <div class="flex items-center gap-x-4">
-                            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-blue-500 dark:bg-blue-600">
-                                <span class="text-lg font-semibold text-white">2</span>
+                    <div class="card-premium glass-card rounded-2xl shadow-premium p-8 scroll-animate" data-scroll-animations-target="animate">
+                        <div class="flex items-center gap-x-6 mb-6">
+                            <div class="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-purple-600 dark:from-purple-600 dark:to-purple-700 interactive-icon">
+                                <span class="text-2xl font-bold text-white">2</span>
                             </div>
-                            <h3 class="text-lg font-semibold leading-8 text-gray-900 dark:text-gray-100">Connect Your AI</h3>
+                            <h3 class="text-2xl font-bold leading-8 text-gray-900 dark:text-gray-100">Connect Your AI</h3>
                         </div>
-                        <p class="mt-4 text-base leading-7 text-gray-600 dark:text-gray-300">
+                        <p class="text-base leading-7 text-gray-600 dark:text-gray-300 text-premium">
                             Use the provided endpoint and authentication token to connect your AI agent to the MCP Server.
                         </p>
                     </div>
-                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-                        <div class="flex items-center gap-x-4">
-                            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-blue-500 dark:bg-blue-600">
-                                <span class="text-lg font-semibold text-white">3</span>
+                    <div class="card-premium glass-card rounded-2xl shadow-premium p-8 scroll-animate" data-scroll-animations-target="animate">
+                        <div class="flex items-center gap-x-6 mb-6">
+                            <div class="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-green-500 to-green-600 dark:from-green-600 dark:to-green-700 interactive-icon">
+                                <span class="text-2xl font-bold text-white">3</span>
                             </div>
-                            <h3 class="text-lg font-semibold leading-8 text-gray-900 dark:text-gray-100">Monitor & Debug</h3>
+                            <h3 class="text-2xl font-bold leading-8 text-gray-900 dark:text-gray-100">Monitor & Debug</h3>
                         </div>
-                        <p class="mt-4 text-base leading-7 text-gray-600 dark:text-gray-300">
+                        <p class="text-base leading-7 text-gray-600 dark:text-gray-300 text-premium">
                             Watch your AI agent interact with web applications through the VNC viewer and debug any issues in real-time.
                         </p>
                     </div>
@@ -153,19 +176,34 @@
             </div>
         </div>
     </div>
-    <!-- CTA Section -->
-    <div class="bg-white dark:bg-gray-800 py-24 sm:py-32">
-        <div class="mx-auto max-w-7xl px-6 lg:px-8">
-            <div class="mx-auto max-w-2xl text-center">
-                <h2 class="text-3xl font-bold mb-4 text-gray-800 dark:text-gray-200">Ready to empower your AI?</h2>
-                <p class="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300">
+
+    <!-- Premium CTA Section -->
+    <div class="bg-gradient-to-br from-white via-blue-50/50 to-purple-50/50 dark:from-gray-800 dark:via-blue-900/20 dark:to-purple-900/20 py-32 sm:py-40 relative">
+        <div class="absolute inset-0 bg-pattern-dots opacity-30"></div>
+        <div class="absolute top-20 left-20 w-64 h-64 bg-blue-400/20 rounded-full blur-3xl float-animation"></div>
+        <div class="absolute bottom-20 right-20 w-80 h-80 bg-purple-400/20 rounded-full blur-3xl float-animation" style="animation-delay: -2s;"></div>
+        
+        <div class="relative mx-auto max-w-7xl px-6 lg:px-8">
+            <div class="mx-auto max-w-4xl text-center">
+                <h2 class="text-5xl md:text-6xl font-extrabold mb-8 text-gradient-premium heading-premium scroll-animate" data-scroll-animations-target="animate">
+                    Ready to empower your AI?
+                </h2>
+                <p class="text-xl md:text-2xl leading-relaxed text-gray-600 dark:text-gray-300 text-premium mb-12 scroll-animate" data-scroll-animations-target="animate">
                     Join the growing number of AI developers who are using Playwright MCP Cloud to enable realistic web interaction for their agents.
                 </p>
-                <div class="mt-10 flex items-center justify-center gap-x-6">
-                    <a href="https://app.mcp-as-a-service.com/account/mcp-instances" class="px-8 py-4 font-bold text-lg text-white bg-blue-600 rounded-md shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-offset-gray-800 transition duration-150 ease-in-out cursor-pointer">Deploy Your First MCP Server</a>
-                    <a href="about.html" class="px-8 py-4 font-bold text-lg text-blue-700 bg-white rounded-md shadow-lg hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:bg-gray-100 dark:text-blue-900 dark:hover:bg-gray-200 transition duration-150 ease-in-out cursor-pointer">Learn more <span class="inline-block ml-1">→</span></a>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-6 scroll-animate" data-scroll-animations-target="animate">
+                    <a href="https://app.mcp-as-a-service.com/account/mcp-instances" 
+                       class="btn-premium px-12 py-6 font-bold text-xl text-white bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 rounded-xl shadow-premium hover:shadow-2xl focus-premium transform hover:scale-105 transition-all duration-300 ease-out glow-pulse">
+                        Deploy Your First MCP Server
+                    </a>
+                    <a href="about.html" 
+                       class="btn-premium px-12 py-6 font-bold text-xl text-blue-700 glass-card shadow-premium hover:shadow-xl focus-premium transform hover:scale-105 transition-all duration-300 ease-out dark:text-blue-300">
+                        Learn more <span class="inline-block ml-2 transform group-hover:translate-x-1 transition-transform duration-300">→</span>
+                    </a>
                 </div>
-                <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">Launching an MCP Server takes less than 10 seconds.</p>
+                <p class="mt-8 text-sm text-gray-500 dark:text-gray-400 scroll-animate" data-scroll-animations-target="animate">
+                    ⚡ Launching an MCP Server takes less than 10 seconds.
+                </p>
             </div>
         </div>
     </div>

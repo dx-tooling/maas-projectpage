@@ -1,3 +1,338 @@
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+/* Advanced animations and effects */
+@keyframes float {
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes glow-pulse {
+    0%,
+    100% {
+        box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+    }
+    50% {
+        box-shadow:
+            0 0 40px rgba(59, 130, 246, 0.6),
+            0 0 80px rgba(59, 130, 246, 0.2);
+    }
+}
+
+@keyframes gradient-shift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes slide-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slide-in-right {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes scale-in {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Respect motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .float-animation {
+        animation: none !important;
+    }
+    .glow-pulse {
+        animation: none !important;
+    }
+    .gradient-shift {
+        animation: none !important;
+    }
+}
+
+/* Utility classes for animations */
+.float-animation {
+    animation: float 6s ease-in-out infinite;
+}
+
+.glow-pulse {
+    animation: glow-pulse 3s ease-in-out infinite;
+}
+
+.gradient-shift {
+    background-size: 200% 200%;
+    animation: gradient-shift 15s ease infinite;
+}
+
+.slide-in-up {
+    animation: slide-in-up 0.8s ease-out forwards;
+}
+
+.slide-in-right {
+    animation: slide-in-right 0.8s ease-out forwards;
+}
+
+.scale-in {
+    animation: scale-in 0.6s ease-out forwards;
+}
+
+/* Glassmorphism effects */
+.glass-card {
+    backdrop-filter: blur(16px) saturate(180%);
+    background-color: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.dark .glass-card {
+    background-color: rgba(17, 25, 40, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.125);
+}
+
+/* Enhanced button effects */
+.btn-premium {
+    position: relative;
+    overflow: hidden;
+    transform: translateZ(0);
+}
+
+.btn-premium::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.6s ease;
+}
+
+.btn-premium:hover::before {
+    left: 100%;
+}
+
+/* Advanced card hover effects */
+.card-premium {
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-premium::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(147, 51, 234, 0.15));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: inherit;
+}
+
+.dark .card-premium::before {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(147, 51, 234, 0.1));
+}
+
+.card-premium:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.card-premium:hover::before {
+    opacity: 1;
+}
+
+.dark .card-premium:hover {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+/* Text gradient effects */
+.text-gradient-premium {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 200%;
+    animation: gradient-shift 12s ease infinite;
+}
+
+.dark .text-gradient-premium {
+    background: linear-gradient(135deg, #a78bfa 0%, #ec4899 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Advanced shadow utilities */
+.shadow-premium {
+    box-shadow:
+        0 10px 25px -3px rgba(0, 0, 0, 0.1),
+        0 4px 6px -2px rgba(0, 0, 0, 0.05),
+        0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+.dark .shadow-premium {
+    box-shadow:
+        0 10px 25px -3px rgba(0, 0, 0, 0.3),
+        0 4px 6px -2px rgba(0, 0, 0, 0.2),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+/* Balanced scroll-triggered animation utilities */
+.scroll-animate {
+    opacity: 0; /* Full fade-in effect for meaningful animation */
+    transform: translateY(30px); /* Noticeable but not excessive movement */
+    transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth, confident timing */
+}
+
+.scroll-animate.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Enhanced focus states for accessibility */
+.focus-premium:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+    transform: scale(1.05);
+}
+
+/* Background pattern utilities */
+.bg-pattern-dots {
+    background-image: radial-gradient(circle, rgba(59, 130, 246, 0.25) 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+.dark .bg-pattern-dots {
+    background-image: radial-gradient(circle, rgba(147, 197, 253, 0.1) 1px, transparent 1px);
+}
+
+.bg-pattern-grid {
+    background-image:
+        linear-gradient(rgba(59, 130, 246, 0.2) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59, 130, 246, 0.2) 1px, transparent 1px);
+    background-size: 50px 50px;
+}
+
+.dark .bg-pattern-grid {
+    background-image:
+        linear-gradient(rgba(147, 197, 253, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(147, 197, 253, 0.1) 1px, transparent 1px);
+}
+
+/* Interactive elements */
+.interactive-icon {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.interactive-icon:hover {
+    transform: rotate(15deg) scale(1.1);
+    filter: drop-shadow(0 10px 20px rgba(59, 130, 246, 0.3));
+}
+
+/* Enhanced typography */
+.text-premium {
+    line-height: 1.7;
+    letter-spacing: -0.025em;
+}
+
+.heading-premium {
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.05em;
+}
+
+/* Smooth scroll behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+/* Video container enhancements */
+.video-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.video-container::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #667eea, #764ba2, #667eea);
+    border-radius: inherit;
+    z-index: -1;
+    animation: gradient-shift 8s ease infinite;
+}
+
+/* Modal enhancements */
+.modal-backdrop {
+    backdrop-filter: blur(8px);
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-panel {
+    transform: scale(0.9) translateY(20px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-panel.show {
+    transform: scale(1) translateY(0);
+}

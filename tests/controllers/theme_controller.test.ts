@@ -62,14 +62,14 @@ describe("ThemeController", () => {
         application = await setupDOM("dark");
         expect(document.documentElement.classList.contains("dark")).toBe(true);
         const button = document.querySelector('[data-theme-target="toggleButton"]') as HTMLButtonElement;
-        expect(button.textContent).toBe("Switch to Light Mode");
+        expect(button.textContent).toBe("Light Mode");
     });
 
     it("should apply light theme if set in localStorage", async () => {
         application = await setupDOM("light");
         expect(document.documentElement.classList.contains("dark")).toBe(false);
         const button = document.querySelector('[data-theme-target="toggleButton"]') as HTMLButtonElement;
-        expect(button.textContent).toBe("Switch to Dark Mode");
+        expect(button.textContent).toBe("Dark Mode");
     });
 
     it("should apply dark theme if OS preference is dark and no localStorage theme", async () => {
@@ -77,7 +77,7 @@ describe("ThemeController", () => {
         application = await setupDOM(null);
         expect(document.documentElement.classList.contains("dark")).toBe(true);
         const button = document.querySelector('[data-theme-target="toggleButton"]') as HTMLButtonElement;
-        expect(button.textContent).toBe("Switch to Light Mode");
+        expect(button.textContent).toBe("Light Mode");
     });
 
     it("should apply light theme if OS preference is light and no localStorage theme", async () => {
@@ -85,7 +85,7 @@ describe("ThemeController", () => {
         application = await setupDOM(null);
         expect(document.documentElement.classList.contains("dark")).toBe(false);
         const button = document.querySelector('[data-theme-target="toggleButton"]') as HTMLButtonElement;
-        expect(button.textContent).toBe("Switch to Dark Mode");
+        expect(button.textContent).toBe("Dark Mode");
     });
 
     it("should toggle from light to dark on click", async () => {
@@ -98,7 +98,7 @@ describe("ThemeController", () => {
 
         expect(document.documentElement.classList.contains("dark")).toBe(true);
         expect(localStorage.getItem("theme")).toBe("dark");
-        expect(button.textContent).toBe("Switch to Light Mode");
+        expect(button.textContent).toBe("Light Mode");
     });
 
     it("should toggle from dark to light on click", async () => {
@@ -111,7 +111,7 @@ describe("ThemeController", () => {
 
         expect(document.documentElement.classList.contains("dark")).toBe(false);
         expect(localStorage.getItem("theme")).toBe("light");
-        expect(button.textContent).toBe("Switch to Dark Mode");
+        expect(button.textContent).toBe("Dark Mode");
     });
 
     // Add test for OS preference change listener if needed (more complex mocking)
