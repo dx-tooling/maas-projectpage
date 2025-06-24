@@ -13,7 +13,8 @@
         "lint": "npm run lint:eslint && npm run lint:types",
         "quality": "npm run prettier:fix && npm run lint",
         "build": "webpack --mode=development",
-        "build:prod": "webpack --mode=production"
+        "build:prod": "webpack --mode=production",
+        "deploy": "npm run build:prod && rsync -avc dist/ root@mcp-as-a-service.com:/var/www/mcp-as-a-service.com/"
     },
     "author": "",
     "license": "MIT",

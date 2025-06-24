@@ -1,37 +1,4 @@
-# AI-friendly Static Landing Page Generator & Styleguide
-
-[![Tests](https://github.com/dx-tooling/maas-projectpage/actions/workflows/tests.yml/badge.svg)](https://github.com/dx-tooling/maas-projectpage/actions/workflows/tests.yml)
-[![Code Quality](https://github.com/dx-tooling/maas-projectpage/actions/workflows/code-quality.yml/badge.svg)](https://github.com/dx-tooling/maas-projectpage/actions/workflows/code-quality.yml)
-
-This project provides a modern template and styleguide for building static marketing and product landing pages. It combines a pre-configured development environment with a set of reusable components, designed to be easily extended either manually or, ideally, through AI coding assistants like Cursor or Windsurf.
-
-Essentially, it's a *text-to-landingpage* starter kit. Just open the project in your AI coding assistant, provide the necessary context (like the styleguide), and instruct the AI to build your landing pages.
-
-**The Goal:** Bridge the gap between the ease of AI-driven development ("text-to-landingpage") and the need for full control over clean, static, zero-dependency HTML/CSS/JS output.
-
-![Screenshot of the Living Styleguide and Example Landing Page](http://manuel.kiessling.net/maas-projectpage/assets/main-screenshot-3840x1559.jpg)
-
-**Who is this for?**
-*   Developers, marketers, or designers who want to quickly generate landing pages using AI tools.
-*   Users who value having complete control over the final static code output.
-*   Individuals comfortable with basic command-line operations (Node.js, npm) but not necessarily deep web development experts.
-
-**What you get:**
-*   A ready-to-use development environment.
-*   Clean, static HTML/CSS/JS output suitable for any static hosting provider (Netlify, Vercel, GitHub Pages, S3, etc.). You manage your own hosting.
-*   A workflow optimized for AI coding assistants.
-
-## Key Features
-
-*   **Modern Tooling:** Built with TypeScript, Webpack 5, Tailwind CSS v4, and PostCSS.
-*   **Living Styleguide:** (`src/styleguide/index.html`) Demonstrates available components and styles for easy reference (and for instructing AI).
-*   **Example Landing Page:** (`src/example-page/index.html`) A practical example built using the styleguide components.
-*   **Stimulus JS:** For lightweight JavaScript interactivity (e.g., modals, theme toggle).
-*   **Dark/Light Mode:** Built-in theme toggling based on user preference and localStorage, with FOUC prevention.
-*   **HTML Partials:** Uses `<include>` tags (`posthtml-include`) for reusable HTML snippets (like headers, footers, theme guard).
-*   **Quality Control:** Pre-configured ESLint, Prettier, and TypeScript checking (`npm run quality`).
-*   **Testing:** Vitest setup for unit/integration tests (primarily for Stimulus controllers — `npm run test`). Configured in `vitest.config.ts`.
-*   **Optimized Build:** Development (`npm run build`) and production (`npm run build:prod`) builds configured.
+# MCP as a Service — Project homepage source code
 
 ## Getting Started
 

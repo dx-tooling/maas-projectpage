@@ -1,0 +1,13 @@
+<!-- Theme Switcher Button Partial -->
+<div class="fixed top-4 right-4 z-50 opacity-25 hover:opacity-100 transition-opacity duration-300" data-controller="theme">
+    <button
+        data-theme-target="toggleButton"
+        data-action="click->theme#toggle"
+        class="flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 dark:bg-gray-800/80 shadow-md text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-900 transition"
+        aria-label="Toggle dark mode"
+    >
+        <!-- Icon: Sun/Moon SVG (auto-updated by theme controller if desired) -->
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2m0 18v2m11-11h-2M3 12H1m16.95 7.07-1.41-1.41M6.34 6.34 4.93 4.93m12.02 0-1.41 1.41M6.34 17.66l-1.41 1.41"/></svg>
+        <span class="hidden sm:inline"></span>
+    </button>
+</div> 

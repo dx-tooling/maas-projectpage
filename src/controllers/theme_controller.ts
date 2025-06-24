@@ -36,8 +36,7 @@ export default class extends Controller {
 
         // Update button text (optional, but good UX)
         if (this.hasToggleButtonTarget) {
-            this.toggleButtonTarget.textContent =
-                effectiveTheme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode";
+            this.toggleButtonTarget.textContent = effectiveTheme === "dark" ? "Light Mode" : "Dark Mode";
         }
     }
 }
