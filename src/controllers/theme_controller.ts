@@ -24,19 +24,10 @@ export default class extends Controller {
         const osPreferenceDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
         const htmlElement = document.documentElement;
 
-        let effectiveTheme: "dark" | "light";
-
         if (selectedTheme === "dark" || (selectedTheme === null && osPreferenceDark)) {
             htmlElement.classList.add("dark");
-            effectiveTheme = "dark";
         } else {
             htmlElement.classList.remove("dark");
-            effectiveTheme = "light";
-        }
-
-        // Update button text (optional, but good UX)
-        if (this.hasToggleButtonTarget) {
-            this.toggleButtonTarget.textContent = effectiveTheme === "dark" ? "Light Mode" : "Dark Mode";
         }
     }
 }

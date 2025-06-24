@@ -26,6 +26,7 @@ export default [
             "assets/vendor/",
             "**/tailwind.config.js",
             "**/webpack.config.js",
+            "**/coverage/",
         ],
     },
     ...compat.extends(
