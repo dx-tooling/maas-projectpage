@@ -53,7 +53,10 @@ describe("ModalController", () => {
     });
 
     afterEach(() => {
-        application?.stop();
+        // Clean up application and DOM
+        if (application) {
+            application.stop();
+        }
         document.body.innerHTML = ""; // Clean up DOM
     });
 

@@ -94,9 +94,14 @@ describe("HeroEffectsController", () => {
     });
 
     afterEach(async () => {
-        // Remove timer related calls
-        application?.stop();
+        // Clean up application and DOM
+        if (application) {
+            application.stop();
+        }
         document.body.innerHTML = ""; // Clean up DOM
+
+        // Clear any lingering timers or promises
+        await new Promise((resolve) => setTimeout(resolve, 0));
     });
 
     // Note: Tests no longer need to fast-forward time

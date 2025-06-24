@@ -54,8 +54,15 @@ describe("ThemeController", () => {
     });
 
     afterEach(() => {
-        application?.stop();
+        // Clean up application and DOM
+        if (application) {
+            application.stop();
+        }
         document.body.innerHTML = ""; // Clean up DOM
+        localStorage.clear(); // Clean up localStorage
+
+        // Reset document element classes
+        document.documentElement.classList.remove("dark");
     });
 
     it("should apply dark theme if set in localStorage", async () => {

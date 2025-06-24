@@ -6,6 +6,9 @@ describe("ScrollAnimationsController", () => {
     let container: HTMLElement;
 
     beforeEach(() => {
+        // Clear any existing DOM content
+        document.body.innerHTML = "";
+
         container = document.createElement("div");
         container.innerHTML = `
             <div data-controller="scroll-animations">
@@ -21,8 +24,14 @@ describe("ScrollAnimationsController", () => {
     });
 
     afterEach(() => {
-        application.stop();
-        document.body.removeChild(container);
+        if (application) {
+            application.stop();
+        }
+        // Clean up DOM
+        if (container && container.parentNode) {
+            container.parentNode.removeChild(container);
+        }
+        document.body.innerHTML = "";
     });
 
     it("should connect without errors", () => {
@@ -46,7 +55,7 @@ describe("ScrollAnimationsController", () => {
         // Mock matchMedia to return reduced motion preference
         const originalMatchMedia = window.matchMedia;
 
-        window.matchMedia = vi.fn().mockImplementation((query) => ({
+        const mockMatchMedia = vi.fn().mockImplementation((query) => ({
             matches: query.includes("prefers-reduced-motion: reduce"),
             media: query,
             onchange: null,
@@ -57,18 +66,22 @@ describe("ScrollAnimationsController", () => {
             dispatchEvent: vi.fn(),
         }));
 
-        // Create a simple test element without triggering complex DOM interactions
-        const testElement = document.createElement("div");
-        testElement.setAttribute("data-controller", "scroll-animations");
-        testElement.innerHTML = '<div data-scroll-animations-target="animate" class="scroll-animate">Test</div>';
+        window.matchMedia = mockMatchMedia;
 
-        // Test that elements exist and can be queried
-        const animateElements = testElement.querySelectorAll('[data-scroll-animations-target="animate"]');
-        expect(animateElements.length).toBe(1);
-        expect(animateElements[0].classList.contains("scroll-animate")).toBe(true);
+        try {
+            // Create a simple test element without triggering complex DOM interactions
+            const testElement = document.createElement("div");
+            testElement.setAttribute("data-controller", "scroll-animations");
+            testElement.innerHTML = '<div data-scroll-animations-target="animate" class="scroll-animate">Test</div>';
 
-        // Restore original matchMedia
-        window.matchMedia = originalMatchMedia;
+            // Test that elements exist and can be queried
+            const animateElements = testElement.querySelectorAll('[data-scroll-animations-target="animate"]');
+            expect(animateElements.length).toBe(1);
+            expect(animateElements[0].classList.contains("scroll-animate")).toBe(true);
+        } finally {
+            // Restore original matchMedia
+            window.matchMedia = originalMatchMedia;
+        }
     });
 
     it("should handle IntersectionObserver configuration", () => {
@@ -79,16 +92,31 @@ describe("ScrollAnimationsController", () => {
             observe: vi.fn(),
             unobserve: vi.fn(),
             disconnect: vi.fn(),
+            takeRecords: vi.fn().mockReturnValue([]),
         };
 
-        window.IntersectionObserver = vi.fn().mockImplementation(() => mockObserver);
+        const MockIntersectionObserver = vi.fn().mockImplementation(() => mockObserver);
+        window.IntersectionObserver = MockIntersectionObserver;
 
-        // Test that the controller can be registered without errors
-        const testApp = Application.start();
-        testApp.register("test-scroll-animations", ScrollAnimationsController);
-        testApp.stop();
+        try {
+            // Test that the controller can be registered without errors
+            const testApp = Application.start();
+            testApp.register("test-scroll-animations", ScrollAnimationsController);
 
-        // Restore
-        window.IntersectionObserver = originalIntersectionObserver;
+            // Create a test element and attach the controller
+            const testElement = document.createElement("div");
+            testElement.setAttribute("data-controller", "test-scroll-animations");
+            testElement.innerHTML = '<div data-test-scroll-animations-target="animate">Test</div>';
+            document.body.appendChild(testElement);
+
+            // Clean up
+            testApp.stop();
+            if (testElement.parentNode) {
+                testElement.parentNode.removeChild(testElement);
+            }
+        } finally {
+            // Restore original IntersectionObserver
+            window.IntersectionObserver = originalIntersectionObserver;
+        }
     });
 });
