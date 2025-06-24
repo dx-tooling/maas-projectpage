@@ -1,7 +1,7 @@
 # AI-friendly Static Landing Page Generator & Styleguide
 
-[![Tests](https://github.com/dx-tooling/landingpages-ai-template/actions/workflows/tests.yml/badge.svg)](https://github.com/dx-tooling/landingpages-ai-template/actions/workflows/tests.yml)
-[![Code Quality](https://github.com/dx-tooling/landingpages-ai-template/actions/workflows/code-quality.yml/badge.svg)](https://github.com/dx-tooling/landingpages-ai-template/actions/workflows/code-quality.yml)
+[![Tests](https://github.com/dx-tooling/maas-projectpage/actions/workflows/tests.yml/badge.svg)](https://github.com/dx-tooling/maas-projectpage/actions/workflows/tests.yml)
+[![Code Quality](https://github.com/dx-tooling/maas-projectpage/actions/workflows/code-quality.yml/badge.svg)](https://github.com/dx-tooling/maas-projectpage/actions/workflows/code-quality.yml)
 
 This project provides a modern template and styleguide for building static marketing and product landing pages. It combines a pre-configured development environment with a set of reusable components, designed to be easily extended either manually or, ideally, through AI coding assistants like Cursor or Windsurf.
 
@@ -9,7 +9,7 @@ Essentially, it's a *text-to-landingpage* starter kit. Just open the project in 
 
 **The Goal:** Bridge the gap between the ease of AI-driven development ("text-to-landingpage") and the need for full control over clean, static, zero-dependency HTML/CSS/JS output.
 
-![Screenshot of the Living Styleguide and Example Landing Page](http://manuel.kiessling.net/landingpages-ai-template/assets/main-screenshot-3840x1559.jpg)
+![Screenshot of the Living Styleguide and Example Landing Page](http://manuel.kiessling.net/maas-projectpage/assets/main-screenshot-3840x1559.jpg)
 
 **Who is this for?**
 *   Developers, marketers, or designers who want to quickly generate landing pages using AI tools.
@@ -37,8 +37,8 @@ Essentially, it's a *text-to-landingpage* starter kit. Just open the project in 
 
 1.  **Clone the Repository:**
     ```bash
-    git clone https://github.com/dx-tooling/landingpages-ai-template.git
-    cd landingpages-ai-template
+    git clone https://github.com/dx-tooling/maas-projectpage.git
+    cd maas-projectpage
     ```
 2.  **Set Up Node.js:** This project uses a specific Node.js version defined in `.nvmrc`. Use Node Version Manager (`nvm`) to ensure compatibility:
     ```bash
@@ -109,7 +109,7 @@ This project is designed to work seamlessly with AI coding assistants like **Cur
 
     **Example workflow in Cursor AI Code Agent:**
 
-    ![Screenshot of Cursor AI with prompt example](http://manuel.kiessling.net/landingpages-ai-template/assets/cursor-screenshot-1920x1529.png)
+    ![Screenshot of Cursor AI with prompt example](http://manuel.kiessling.net/maas-projectpage/assets/cursor-screenshot-1920x1529.png)
 
 **Why `nvm use` before `npm` commands?** The project's build tools and linters might depend on the specific Node.js version defined in `.nvmrc`. Running `nvm use` ensures the correct version is active before executing `npm` scripts.
 

@@ -1,9 +1,9 @@
-## Development Rules for landingpages Project
+## Development Rules for this Project
 
 ### Code Style & Quality
 
 -   **Formatting:** Use Prettier. Run `npm run prettier:fix` to format code automatically.
--   **Linting:** 
+-   **Linting:**
     -   Run `npm run lint:eslint` for ESLint checks (style, patterns).
     -   Run `npm run lint:types` for TypeScript type checking (`tsc --noEmit`).
     -   Run `npm run lint` for both.
@@ -18,11 +18,11 @@
 ### Build Process
 
 -   **Bundler:** Webpack handles TypeScript compilation, CSS processing (Tailwind/PostCSS), and HTML processing.
--   **Build Command:** 
+-   **Build Command:**
     -   Use `npm run build` for development builds (includes source maps).
     -   Use `npm run build:prod` for production builds (no source maps, content hashes in filenames).
 -   **Output:** Compiled assets are placed in the `dist/` directory.
--   **HTML Processing:** 
+-   **HTML Processing:**
     -   All non-partial `.html` files within `src/` are automatically found (`glob`) and processed by `html-webpack-plugin`.
     -   `posthtml-loader` with `posthtml-include` is used *before* `html-loader` to handle `<include src="..."></include>` tags for HTML partials.
     -   Partials should reside in `src/partials/` and are excluded from direct `HtmlWebpackPlugin` processing.
