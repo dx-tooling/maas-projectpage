@@ -1,4 +1,4 @@
-# MCP as a Service — Project homepage source code
+# MCP as a Service · Project page source code
 
 ## Getting Started
 
