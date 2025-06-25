@@ -49,7 +49,7 @@ export default class ScrollAnimationsController extends Controller {
                             delay = parseInt(customDelay, 10);
                         } else {
                             // Slightly faster stagger for more responsive feel
-                            delay = Array.from(this.animateTargets).indexOf(target) * 60; // Reduced from 75ms to 60ms
+                            delay = Array.from(this.animateTargets).indexOf(target) * 5; // Reduced from 75ms to 60ms
                         }
 
                         setTimeout(() => {
