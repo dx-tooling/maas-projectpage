@@ -2,10 +2,10 @@
 <html lang="en" class="h-full scroll-smooth">
 
 <head>
-    <title>About Playwright MCP Cloud</title>
+    <title>About MCP as a Service · Fair-code MCP server management platform</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="A detailed look at how our cloud-based MCP Server enables AI agents to interact with real browsers.">
+    <meta name="description" content="MCP as a Service is a Fair-code platform for managing MCP servers. Self-host for free, or use our hosted service. Contribute or get started on GitHub.">
 
     <include src="partials/theme-fouc-guard.html"></include>
 
@@ -22,24 +22,65 @@
 <include src="partials/nav.html"></include>
 
 <div class="relative bg-pattern-dots" data-controller="scroll-animations">
-    <!-- Premium Hero Section -->
+    <!-- Hero Section: OSS + SaaS Story -->
     <div class="relative overflow-hidden bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-50 dark:from-gray-900 dark:via-purple-900/20 dark:to-blue-900/20 py-32 sm:py-40 gradient-shift">
-        <!-- Animated Background Elements -->
         <div class="absolute inset-0 bg-pattern-grid opacity-30"></div>
         <div class="absolute top-20 left-20 w-80 h-80 bg-purple-400/20 rounded-full blur-3xl float-animation"></div>
         <div class="absolute bottom-20 right-20 w-72 h-72 bg-blue-400/20 rounded-full blur-3xl float-animation" style="animation-delay: -2s;"></div>
-        
+
         <div class="relative mx-auto max-w-7xl px-6 lg:px-8">
             <div class="mx-auto max-w-4xl text-center">
                 <h1 class="text-6xl md:text-7xl lg:text-8xl font-extrabold mb-8 text-gradient-premium heading-premium scroll-animate" data-scroll-animations-target="animate">
-                    About Playwright MCP Cloud
+                    About MCP as a Service
                 </h1>
-                <p class="mt-8 text-xl md:text-2xl leading-relaxed text-gray-600 dark:text-gray-300 text-premium scroll-animate" data-scroll-animations-target="animate">
-                    A detailed look at how our cloud-based MCP Server enables AI agents to interact with real browsers.
+
+                <p class="mt-8 text-xl md:text-2xl leading-relaxed text-gray-600 dark:text-gray-300 text-premium scroll-animate font-extralight" data-scroll-animations-target="animate">
+                    MCP as a Service is a Fair-code platform that allows you to easily deploy MCP servers that provide tools to AI agents,
+                    and that are reachable from anywhere, even cloud solutions like N8N — while still being available only to you and your AI
+                    workflows thanks to strong authentication.
                 </p>
+
+                <p class="mt-8 text-xl md:text-2xl leading-relaxed text-gray-600 dark:text-gray-300 text-premium scroll-animate font-extralight" data-scroll-animations-target="animate">
+                    The project is currently in an early stage of development, but already provides a fully functional "Playwright MCP in the cloud" solution.
+                </p>
+
+                <p class="mt-8 text-xl md:text-2xl leading-relaxed text-gray-600 dark:text-gray-300 text-premium scroll-animate font-extralight" data-scroll-animations-target="animate">
+                    Using our hosted service, you can deploy such an MCP server with a single click, and connect it to your AI agents with minimal setup.
+                    This in turn allows your AI agents to remote-control a real Google Chrome browser, and surf the web like a human would.
+                </p>
+
+                <p class="mt-8 text-xl md:text-2xl leading-relaxed text-gray-600 dark:text-gray-300 text-premium scroll-animate font-extralight" data-scroll-animations-target="animate">
+                    The software powering our hosted service is provided using the <a href="https://faircode.io" target="_blank">Fair-code model</a>, and its code is available on GitHub.
+                </p>
+
                 <p class="mt-8 text-sm text-gray-500 dark:text-gray-400 scroll-animate" data-scroll-animations-target="animate">
-                    Already signed up? <a href="https://app.mcp-as-a-service.com/account/mcp-instances" class="text-blue-600 dark:text-blue-400 underline hover:text-blue-800 dark:hover:text-blue-200 transition-colors">Manage your MCP instances here</a>.
+                    <a href="https://github.com/dx-tooling/maas-webapp" class="text-blue-600 dark:text-blue-400 underline hover:text-blue-800 dark:hover:text-blue-200 transition-colors font-semibold" target="_blank">
+                        Get the code
+                    </a>
+                    or
+                    <a href="https://app.mcp-as-a-service.com/account/mcp-instances" class="text-purple-600 dark:text-purple-400 underline hover:text-purple-800 dark:hover:text-purple-200 transition-colors font-semibold" target="_blank">
+                        try the hosted service</a>.
                 </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- OSS Contribution Section -->
+    <div class="py-24 sm:py-32 bg-white dark:bg-gray-900/50 relative">
+        <div class="absolute inset-0 bg-pattern-dots opacity-10"></div>
+        <div class="relative mx-auto max-w-7xl px-6 lg:px-8">
+            <div class="mx-auto max-w-3xl text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-extrabold mb-6 text-gradient-premium heading-premium scroll-animate" data-scroll-animations-target="animate">
+                    Contribute or Self-Host
+                </h2>
+                <p class="text-lg md:text-xl leading-relaxed text-gray-600 dark:text-gray-300 text-premium scroll-animate font-extralight" data-scroll-animations-target="animate">
+                    MCP as a Service is a Fair-code project. <br>Clone the code, run your own instance, or help us build the future of MCP server management.
+                    <br>All contributions are welcome!
+                </p>
+                <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-6 scroll-animate" data-scroll-animations-target="animate">
+                    <a href="https://github.com/dx-tooling/maas-webapp" class="btn-premium px-8 py-4 font-bold text-lg text-white bg-gradient-to-r from-green-600 via-blue-700 to-blue-800 rounded-xl shadow-premium hover:shadow-2xl focus-premium transform hover:scale-105 transition-all duration-300 ease-out glow-pulse" target="_blank">Get the Source on GitHub</a>
+                    <a href="https://github.com/dx-tooling/maas-webapp#readme" class="btn-premium px-8 py-4 font-bold text-lg text-blue-700 glass-card shadow-premium hover:shadow-xl focus-premium transform hover:scale-105 transition-all duration-300 ease-out dark:text-blue-300" target="_blank">Read the Docs</a>
+                </div>
             </div>
         </div>
     </div>
@@ -78,7 +119,7 @@
                 <h2 class="text-5xl md:text-6xl font-extrabold mb-8 text-gradient-premium heading-premium scroll-animate" data-scroll-animations-target="animate">
                     How It Works
                 </h2>
-                <p class="text-xl md:text-2xl leading-relaxed text-gray-600 dark:text-gray-300 text-premium scroll-animate" data-scroll-animations-target="animate">
+                <p class="text-xl md:text-2xl leading-relaxed text-gray-600 dark:text-gray-300 text-premium scroll-animate font-extralight" data-scroll-animations-target="animate">
                     Let's break down how Playwright MCP Cloud enables AI agents to interact with real browsers.
                 </p>
             </div>
@@ -131,14 +172,14 @@
                                 </li>
                             </ul>
                             <div class="mt-8">
-                                <a href="https://app.mcp-as-a-service.com/account/mcp-instances" 
+                                <a href="https://app.mcp-as-a-service.com/account/mcp-instances"
                                    class="btn-premium inline-block px-8 py-4 font-bold text-lg text-white bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 rounded-xl shadow-premium hover:shadow-2xl focus-premium transform hover:scale-105 transition-all duration-300 ease-out glow-pulse">
                                     Deploy Your First MCP Server
                                 </a>
                                 <p class="mt-3 text-sm text-gray-500 dark:text-gray-400">⚡ Launching an MCP Server takes less than 10 seconds.</p>
                             </div>
                         </div>
-                        
+
                         <div class="card-premium glass-card rounded-2xl shadow-premium p-8 scroll-animate" data-scroll-animations-target="animate">
                             <div class="flex items-start gap-6 mb-6">
                                 <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500 to-purple-600 dark:from-purple-600 dark:to-purple-700 interactive-icon">
@@ -177,7 +218,7 @@
                             </ul>
                         </div>
                     </div>
-                    
+
                     <!-- Right Column -->
                     <div class="space-y-12">
                         <div class="card-premium glass-card rounded-2xl shadow-premium p-8 scroll-animate" data-scroll-animations-target="animate">
@@ -225,7 +266,7 @@
                                 </li>
                             </ul>
                         </div>
-                        
+
                         <div class="card-premium glass-card rounded-2xl shadow-premium p-8 scroll-animate" data-scroll-animations-target="animate">
                             <div class="flex items-start gap-6 mb-6">
                                 <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-orange-500 to-orange-600 dark:from-orange-600 dark:to-orange-700 interactive-icon">
@@ -282,17 +323,17 @@
         <div class="absolute inset-0 bg-pattern-dots opacity-30"></div>
         <div class="absolute top-20 left-20 w-64 h-64 bg-purple-400/20 rounded-full blur-3xl float-animation"></div>
         <div class="absolute bottom-20 right-20 w-80 h-80 bg-blue-400/20 rounded-full blur-3xl float-animation" style="animation-delay: -2s;"></div>
-        
+
         <div class="relative mx-auto max-w-7xl px-6 lg:px-8">
             <div class="mx-auto max-w-4xl text-center">
                 <h2 class="text-5xl md:text-6xl font-extrabold mb-8 text-gradient-premium heading-premium scroll-animate" data-scroll-animations-target="animate">
                     Ready to Get Started?
                 </h2>
-                <p class="text-xl md:text-2xl leading-relaxed text-gray-600 dark:text-gray-300 text-premium mb-12 scroll-animate" data-scroll-animations-target="animate">
+                <p class="text-xl md:text-2xl leading-relaxed text-gray-600 dark:text-gray-300 text-premium mb-12 scroll-animate font-extralight" data-scroll-animations-target="animate">
                     Deploy your first MCP Server instance and start enabling your AI agents to interact with real browsers.
                 </p>
                 <div class="scroll-animate" data-scroll-animations-target="animate">
-                    <a href="https://app.mcp-as-a-service.com/account/mcp-instances" 
+                    <a href="https://app.mcp-as-a-service.com/account/mcp-instances"
                        class="btn-premium inline-block px-12 py-6 font-bold text-xl text-white bg-gradient-to-r from-purple-600 via-purple-700 to-blue-700 rounded-xl shadow-premium hover:shadow-2xl focus-premium transform hover:scale-105 transition-all duration-300 ease-out glow-pulse">
                         Deploy Your First MCP Server
                     </a>
