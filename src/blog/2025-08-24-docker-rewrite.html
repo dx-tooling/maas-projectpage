@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full scroll-smooth">
+<head>
+    <title>Platform Rewrite: Switching from OS processes to Docker containers - MCP-as-a-Service Blog</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Learn how we modernized our MCP-as-a-Service platform with a comprehensive Docker rewrite, replacing fragile OS process management with containerized orchestration.">
+
+    <!-- Standard SEO Meta Tags -->
+    <meta name="author" content="Manuel Kießling">
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="Docker, Infrastructure, DevOps, MCP, Playwright, VNC, Traefik, Containerization, Orchestration">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://mcp-as-a-service.com/blog/2025-08-24-docker-rewrite.html">
+    <meta property="og:title" content="Platform Rewrite: Switching from OS processes to Docker containers">
+    <meta property="og:description" content="Learn how we modernized our MCP-as-a-Service platform with a comprehensive Docker rewrite, replacing fragile OS process management with containerized orchestration.">
+    <meta property="og:image" content="https://mcp-as-a-service.com/images/docker-rewrite-preview.jpg">
+    <meta property="og:site_name" content="MCP-as-a-Service">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2025-08-24T00:00:00+00:00">
+    <meta property="article:author" content="Manuel Kießling">
+    <meta property="article:section" content="Infrastructure">
+    <meta property="article:tag" content="Docker">
+    <meta property="article:tag" content="Infrastructure">
+    <meta property="article:tag" content="DevOps">
+    <meta property="article:tag" content="MCP">
+    <meta property="article:tag" content="Playwright">
+    <meta property="article:tag" content="VNC">
+    <meta property="article:tag" content="Traefik">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@dx_tooling">
+    <meta name="twitter:creator" content="@manuelkiessling">
+    <meta name="twitter:title" content="Platform Rewrite: Switching from OS processes to Docker containers">
+    <meta name="twitter:description" content="Learn how we modernized our MCP-as-a-Service platform with a comprehensive Docker rewrite, replacing fragile OS process management with containerized orchestration.">
+    <meta name="twitter:image" content="https://mcp-as-a-service.com/images/docker-rewrite-preview.jpg">
+
+    <!-- Blog System Metadata (for our internal system) -->
+    <meta name="blog:readTime" content="12 min read">
+
+    <!-- Include FOUC guard script -->
+    <include src="partials/theme-fouc-guard.html"></include>
+
+    <!-- Link to CSS will be injected here by HtmlWebpackPlugin -->
+</head>
+
+<body class="h-full bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-200">
+    <div class="container mx-auto px-4 py-12 max-w-4xl">
+        <!-- Blog Header -->
+        <header class="mb-8">
+            <nav class="mb-6">
+                <a href="../index.html" class="text-blue-600 dark:text-blue-400 hover:underline">← Back to Home</a>
+            </nav>
+
+            <div class="mb-6">
+                <div class="flex items-center gap-3 text-sm text-gray-500 dark:text-gray-400 mb-3">
+                    <time datetime="2025-08-24">August 24, 2025</time>
+                    <span>•</span>
+                    <span>12 min read</span>
+                    <span>•</span>
+                    <span>Manuel Kießling</span>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300 rounded">Docker</span>
+                    <span class="px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300 rounded">Infrastructure</span>
+                    <span class="px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300 rounded">MCP</span>
+                    <span class="px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300 rounded">Playwright</span>
+                    <span class="px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300 rounded">VNC</span>
+                    <span class="px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300 rounded">Traefik</span>
+                </div>
+            </div>
+
+            <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-6 leading-tight">
+                Platform Rewrite: Switching from OS processes to Docker containers
+            </h1>
+
+            <p class="text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
+                How we transformed our MCP-as-a-Service platform from fragile OS process management to a robust, containerized architecture that improves reliability and enables future growth.
+            </p>
+        </header>
+
+        <!-- Blog Content -->
+        <article class="prose prose-lg dark:prose-invert max-w-none">
+            <p class="text-lg text-gray-700 dark:text-gray-300 mb-6">
+                Our journey to modernize the MCP-as-a-Service platform began when we realized that our existing OS process-based orchestration was fundamentally flawed for production use. What started as a proof-of-concept for managing Playwright MCP instances with a very pragmatic approach, turned out to be a dead end architecture- and reliability-wise if we wanted to take the project serious and extend and stabilize it.
+            </p>
+
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white mt-8 mb-4">The Challenge: Architectural Dead End</h2>
+            <p class="text-gray-700 dark:text-gray-300 mb-6">
+                Our original proof-of-concept architecture relied on managing multiple OS processes directly on the host system:
+            </p>
+            <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 mb-6">
+                <li><strong>Xvfb</strong> - Virtual display server for headless browser environments</li>
+                <li><strong>Playwright MCP</strong> - Node.js-based MCP server for browser automation</li>
+                <li><strong>x11vnc</strong> - VNC server for remote desktop access</li>
+                <li><strong>websockify</strong> - WebSocket proxy for browser-based VNC access</li>
+            </ul>
+
+            <p class="text-gray-700 dark:text-gray-300 mb-6">
+                While this approach worked for initial testing and development, it revealed fundamental architectural limitations that made it unsuitable for serious production use:
+            </p>
+            <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 mb-6">
+                <li><strong>Dynamic port management</strong> - Each instance required unique host ports, leading to port conflicts and complex allocation logic</li>
+                <li><strong>Process fragility</strong> - OS processes could crash silently, requiring complex monitoring and restart logic</li>
+                <li><strong>Resource isolation</strong> - Limited isolation between instances, potential for resource contention</li>
+                <li><strong>Deployment complexity</strong> - Difficult to ensure consistent environments across development and production</li>
+                <li><strong>Scaling limitations</strong> - Adding new MCP instance types required significant infrastructure changes</li>
+                <li><strong>Architectural dead end</strong> - The approach fundamentally couldn't provide the reliability and scalability needed for production</li>
+            </ul>
+
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white mt-8 mb-4">Our Solution: Complete Architectural Overhaul</h2>
+            <p class="text-gray-700 dark:text-gray-300 mb-6">
+                Rather than trying to patch the fundamentally flawed OS process approach, we decided to completely redesign the architecture from the ground up. We replaced the entire system with a Docker-centric, subdomain-based solution that provides proper isolation, reliability, and scalability.
+            </p>
+
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mt-6 mb-3">Container Design</h3>
+            <p class="text-gray-700 dark:text-gray-300 mb-6">
+                Each MCP instance container encapsulates all the necessary components:
+            </p>
+            <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 mb-6">
+                <li><strong>Base Image</strong> - Node.js 22 on Debian Bookworm for optimal Playwright compatibility</li>
+                <li><strong>Process Management</strong> - Supervisord to orchestrate the four core processes in the correct order</li>
+                <li><strong>Fixed Internal Ports</strong> - MCP (8080), VNC (5900), noVNC (6080) - no more dynamic host port mapping</li>
+                <li><strong>Resource Limits</strong> - 1GB memory limit per container with automatic restart policies</li>
+                <li><strong>Health Checks</strong> - Built-in Docker health checks for noVNC endpoint availability</li>
+            </ul>
+
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mt-6 mb-3">Networking Revolution with Traefik</h3>
+            <p class="text-gray-700 dark:text-gray-300 mb-6">
+                The most significant improvement came from replacing nginx-based routing with Traefik:
+            </p>
+            <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 mb-6">
+                <li><strong>Subdomain-based routing</strong> - Each instance gets predictable URLs: <code>mcp-{id}.mcp-as-a-service.com</code> and <code>vnc-{id}.mcp-as-a-service.com</code></li>
+                <li><strong>Dynamic discovery</strong> - Traefik automatically discovers containers via Docker labels, eliminating manual nginx configuration</li>
+                <li><strong>TLS termination</strong> - Centralized SSL/TLS handling with existing wildcard certificates</li>
+                <li><strong>ForwardAuth integration</strong> - Bearer token validation at the edge for MCP endpoints</li>
+            </ul>
+
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white mt-8 mb-4">Technical Implementation Details</h2>
+
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mt-6 mb-3">Supervisor Process Orchestration</h3>
+            <p class="text-gray-700 dark:text-gray-300 mb-6">
+                Inside each container, Supervisord manages the process lifecycle with proper dependencies:
+            </p>
+            <ol class="list-decimal list-inside space-y-2 text-gray-700 dark:text-gray-300 mb-6">
+                <li><strong>Xvfb (Priority 10)</strong> - Virtual display server starts first</li>
+                <li><strong>Playwright MCP (Priority 20)</strong> - Waits for Xvfb, starts MCP server on port 8080</li>
+                <li><strong>x11vnc (Priority 30)</strong> - Waits for Xvfb, starts VNC server on port 5900</li>
+                <li><strong>websockify (Priority 40)</strong> - Waits for x11vnc, proxies VNC to port 6080 for browser access</li>
+            </ol>
+
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mt-6 mb-3">Traefik Label Configuration</h3>
+            <p class="text-gray-700 dark:text-gray-300 mb-6">
+                Each container automatically configures its own routing via Docker labels:
+            </p>
+            <pre class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto text-sm"><code># MCP endpoint routing
+traefik.http.routers.mcp-{instance}.rule=Host(`mcp-{instance}.mcp-as-a-service.com`)
+traefik.http.services.mcp-{instance}.loadbalancer.server.port=8080
+traefik.http.middlewares.mcp-{instance}-auth.forwardauth.address=https://app.mcp-as-a-service.com/auth/mcp-bearer-check
+
+# VNC endpoint routing
+traefik.http.routers.vnc-{instance}.rule=Host(`vnc-{instance}.mcp-as-a-service.com`)
+traefik.http.services.vnc-{instance}.loadbalancer.server.port=6080</code></pre>
+
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mt-6 mb-3">ForwardAuth Security</h3>
+            <p class="text-gray-700 dark:text-gray-300 mb-6">
+                We implemented a custom ForwardAuth endpoint in Symfony that validates MCP bearer tokens:
+            </p>
+            <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 mb-6">
+                <li><strong>Edge enforcement</strong> - Authentication happens before requests reach the MCP container</li>
+                <li><strong>Instance identification</strong> - Extracts instance ID from subdomain for token validation</li>
+                <li><strong>Performance optimized</strong> - 5-minute in-memory cache for static bearer tokens</li>
+                <li><strong>Security hardened</strong> - Constant-time comparison and rate limiting</li>
+            </ul>
+
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white mt-8 mb-4">Production Architecture</h2>
+            <p class="text-gray-700 dark:text-gray-300 mb-6">
+                Our production deployment uses a hybrid approach that maximizes performance while maintaining reliability:
+            </p>
+
+            <div class="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg mb-6">
+                <h4 class="text-lg font-semibold mb-3">Network Topology</h4>
+                <pre class="text-sm"><code>Internet (80/443) → Traefik Container → {
+  app.mcp-as-a-service.com → nginx:8090 (native Symfony webapp)
+  mcp-{id}.mcp-as-a-service.com → mcp-instance-container:8080
+  vnc-{id}.mcp-as-a-service.com → mcp-instance-container:6080
+}</code></pre>
+            </div>
+
+            <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 mb-6">
+                <li><strong>Native webapp</strong> - Symfony application runs natively for optimal performance</li>
+                <li><strong>Containerized MCP instances</strong> - Isolated, scalable browser environments</li>
+                <li><strong>Traefik reverse proxy</strong> - Handles all HTTP traffic and TLS termination</li>
+                <li><strong>Shared Docker network</strong> - Enables secure communication between Traefik and MCP containers</li>
+            </ul>
+
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white mt-8 mb-4">Results and Technical Improvements</h2>
+            <p class="text-gray-700 dark:text-gray-300 mb-6">
+                The Docker rewrite delivered significant improvements across multiple dimensions:
+            </p>
+
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mt-6 mb-3">Reliability Improvements</h3>
+            <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 mb-6">
+                <li><strong>Process stability</strong> - Container isolation prevents cascading failures</li>
+                <li><strong>Automatic recovery</strong> - Docker restart policies handle crashes gracefully</li>
+                <li><strong>Health monitoring</strong> - Built-in health checks provide real-time status</li>
+                <li><strong>Predictable lifecycle</strong> - Start/stop/restart operations are atomic and reliable</li>
+            </ul>
+
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mt-6 mb-3">Operational Improvements</h3>
+            <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 mb-6">
+                <li><strong>Simplified deployment</strong> - No more dynamic port allocation or nginx configuration</li>
+                <li><strong>Better observability</strong> - Docker logs and metrics provide clear visibility</li>
+                <li><strong>Easier debugging</strong> - Container isolation makes issues easier to reproduce and fix</li>
+                <li><strong>Scaling foundation</strong> - Easy to add new MCP instance types and scale horizontally</li>
+            </ul>
+
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mt-6 mb-3">Developer Experience Improvements</h3>
+            <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 mb-6">
+                <li><strong>Consistent environments</strong> - Development and production use identical container images</li>
+                <li><strong>Local testing</strong> - Docker Compose setup enables full local development</li>
+                <li><strong>Predictable URLs</strong> - Subdomain-based routing eliminates port confusion</li>
+                <li><strong>Simplified CLI</strong> - Docker commands replace complex process management</li>
+            </ul>
+
+            <p class="text-lg text-gray-700 dark:text-gray-300 mb-8">
+                The Docker rewrite has transformed the MCP-as-a-Service platform from a proof-of-concept into a robust, scalable foundation. By recognizing the architectural dead end early and making the decision to completely redesign the system, we've created a platform that not only meets our current needs but also provides a solid base for future development.
+            </p>
+        </article>
+
+        <!-- Blog Footer -->
+        <footer class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+            <div class="flex justify-between items-center">
+                <a href="../index.html" class="text-blue-600 dark:text-blue-400 hover:underline">← Back to Home</a>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- The script tag will be injected by HtmlWebpackPlugin -->
+</body>
+</html>

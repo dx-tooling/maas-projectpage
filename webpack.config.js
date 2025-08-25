@@ -61,16 +61,19 @@ module.exports = (env, argv) => {
                     // then html-loader to process the final HTML string.
                     use: [
                         {
+                            loader: "posthtml-loader",
+                            options: {
+                                plugins: [
+                                    require("posthtml-include")({ root: path.resolve(__dirname, "src") }),
+                                    require("./posthtml-blog-posts.js").default(),
+                                ],
+                            },
+                        },
+                        {
                             loader: "html-loader",
                             options: {
                                 // Optional: Disable attribute processing if causing issues
                                 // sources: false,
-                            },
-                        },
-                        {
-                            loader: "posthtml-loader",
-                            options: {
-                                plugins: [require("posthtml-include")({ root: path.resolve(__dirname, "src") })],
                             },
                         },
                     ],
