@@ -5,7 +5,7 @@ This landing page now includes an automated blog section that automatically extr
 ## How It Works
 
 1. **Blog Post Structure**: Each blog post should be an HTML file in the `src/blog/` directory
-2. **Standard Metadata**: The system automatically extracts metadata from standard schemas (Open Graph, Twitter Cards, Schema.org)
+2. **Standard Metadata**: The system automatically extracts metadata from Open Graph and Twitter Cards
 3. **Automatic Population**: Blog posts are automatically displayed on the landing page
 4. **Build Integration**: The blog section is populated during the webpack build process
 
@@ -21,7 +21,11 @@ This landing page now includes an automated blog section that automatically extr
 <meta property="og:type" content="article">
 <meta property="og:title" content="Your Blog Post Title">
 <meta property="og:description" content="A brief summary of your blog post content.">
-<meta property="og:article:published_time" content="2025-08-24T00:00:00+00:00">
+<!-- Note: Our extractor expects the non-og-prefixed article properties -->
+<meta property="article:published_time" content="2025-08-24T00:00:00+00:00">
+<meta property="article:author" content="Author Name">
+<meta property="article:tag" content="Tag1">
+<meta property="article:tag" content="Tag2">
 ```
 
 ### **Recommended Additional Metadata**
@@ -31,8 +35,7 @@ This landing page now includes an automated blog section that automatically extr
 <meta name="twitter:title" content="Your Blog Post Title">
 <meta name="twitter:description" content="A brief summary of your blog post content.">
 
-<!-- Standard SEO -->
-<meta name="author" content="Author Name">
+<!-- Standard SEO (author is optional; Open Graph article:author is preferred) -->
 <meta name="keywords" content="Tag1, Tag2, Tag3">
 <meta name="description" content="A brief summary of your blog post content.">
 
@@ -40,23 +43,8 @@ This landing page now includes an automated blog section that automatically extr
 <meta name="blog:readTime" content="5 min read">
 ```
 
-### **Schema.org Structured Data (Optional but Recommended)**
-```html
-<script type="application/ld+json">
-{
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "headline": "Your Blog Post Title",
-    "description": "A brief summary of your blog post content.",
-    "author": {
-        "@type": "Person",
-        "name": "Author Name"
-    },
-    "datePublished": "2025-08-24T00:00:00+00:00",
-    "keywords": ["Tag1", "Tag2", "Tag3"]
-}
-</script>
-```
+### **Schema.org Structured Data**
+Note: Currently not parsed by our build-time extractor. You may include JSON-LD for SEO, but it will not be used for blog card generation.
 
 3. Add your blog content in the `<body>` section
 
@@ -65,21 +53,20 @@ This landing page now includes an automated blog section that automatically extr
 ## Metadata Priority
 
 The system extracts metadata in this priority order:
-1. **Open Graph (og:)** - Best for social media sharing
-2. **Twitter Card (twitter:)** - Twitter-specific optimization
-3. **Standard meta tags** - Basic SEO
-4. **Schema.org JSON-LD** - Semantic web and search engines
+1. **Open Graph (og:) and article:** - Preferred for title, description, date, author, and tags
+2. **Twitter Card (twitter:)** - Fallback for title and description
+3. **Standard meta tags** - Fallback for description and keywords
 
 ## Required Fields
 
 - **Title**: `og:title` or `twitter:title` or `<title>` tag
 - **Summary**: `og:description` or `twitter:description` or `meta name="description"`
-- **Date**: `og:article:published_time` (ISO 8601 format)
+- **Date**: `article:published_time` (ISO 8601 format)
 
 ## Optional Fields
 
-- **Author**: `og:article:author` or `meta name="author"`
-- **Tags**: `og:article:tag` (multiple) or `meta name="keywords"`
+- **Author**: `article:author` (preferred) or `meta name="author"`
+- **Tags**: `article:tag` (multiple) or `meta name="keywords"`
 - **Read Time**: `meta name="blog:readTime"` (for our internal system)
 
 ## Benefits of Standard Schemas

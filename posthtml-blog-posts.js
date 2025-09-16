@@ -101,6 +101,7 @@ export default function blogPostsPlugin() {
 
         // Limit to latest 6 posts for the landing page
         const latestPosts = blogPosts.slice(0, 6);
+        const latestCompactPosts = blogPosts.slice(0, 3);
 
         // Find the blog section and populate it
         tree.walk((node) => {
@@ -157,6 +158,50 @@ export default function blogPostsPlugin() {
                                 attrs: {
                                     href: post.url,
                                     class: "inline-block text-blue-600 dark:text-blue-400 hover:underline text-sm font-medium",
+                                },
+                                content: "Read More →",
+                            },
+                        ],
+                    };
+                });
+            }
+
+            // Populate compact list under hero section
+            if (node.tag === "div" && node.attrs && node.attrs.id === "blog-posts-compact-container") {
+                node.content = latestCompactPosts.map((post) => {
+                    return {
+                        tag: "a",
+                        attrs: {
+                            href: post.url,
+                            class:
+                                "group glass-card rounded-md px-4 py-3 shadow-premium flex items-center justify-between gap-4 hover:bg-gray-50/70 dark:hover:bg-gray-800/70 transition-colors cursor-pointer no-underline",
+                        },
+                        content: [
+                            {
+                                tag: "span",
+                                attrs: { class: "shrink-0 text-sm text-gray-600 dark:text-gray-300" },
+                                content: new Date(post.date).toLocaleDateString("en-US", {
+                                    year: "numeric",
+                                    month: "short",
+                                    day: "numeric",
+                                }),
+                            },
+                            {
+                                tag: "div",
+                                attrs: { class: "min-w-0 flex-1" },
+                                content: [
+                                    {
+                                        tag: "p",
+                                        attrs: { class: "truncate text-sm font-medium text-gray-900 dark:text-gray-100" },
+                                        content: post.title,
+                                    },
+                                ],
+                            },
+                            {
+                                tag: "span",
+                                attrs: {
+                                    class:
+                                        "shrink-0 text-blue-700 dark:text-blue-300 group-hover:underline text-sm font-medium",
                                 },
                                 content: "Read More →",
                             },
