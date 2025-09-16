@@ -12,18 +12,30 @@ module.exports = (env, argv) => {
         ignore: ["./src/partials/**/*.html"], // Exclude partials from direct processing by HtmlWebpackPlugin
     });
 
+    // Find all Markdown blog posts
+    const markdownBlogFiles = glob.sync("./src/blog/*.md");
+
     // Create an HtmlWebpackPlugin instance for each HTML file found
-    const htmlPlugins = htmlFiles.map((file) => {
-        return new HtmlWebpackPlugin({
-            template: file,
-            // Calculate relative path for filename based on src directory
-            filename: path.relative("src", file),
-            // Important: Prevent HtmlWebpackPlugin from injecting assets again,
-            // as html-loader/posthtml-loader will handle it.
-            // Or configure injection points if needed, but for simple includes, 'false' is easier.
-            inject: true, // Keep injection for CSS/JS unless manual placement is preferred
-        });
-    });
+    const htmlPlugins = [
+        // HTML pages
+        ...htmlFiles.map((file) => {
+            return new HtmlWebpackPlugin({
+                template: file,
+                // Calculate relative path for filename based on src directory
+                filename: path.relative("src", file),
+                inject: true,
+            });
+        }),
+        // Markdown blog posts → generate blog/<name>.html
+        ...markdownBlogFiles.map((file) => {
+            const base = path.basename(file, path.extname(file));
+            return new HtmlWebpackPlugin({
+                template: file,
+                filename: path.join("blog", `${base}.html`),
+                inject: true,
+            });
+        }),
+    ];
 
     return {
         entry: "./src/index.ts",
@@ -65,7 +77,7 @@ module.exports = (env, argv) => {
                             options: {
                                 plugins: [
                                     require("posthtml-include")({ root: path.resolve(__dirname, "src") }),
-                                    require("./posthtml-blog-posts.js").default(),
+                                    require("./posthtml-blog-posts.js")(),
                                 ],
                             },
                         },
@@ -75,6 +87,24 @@ module.exports = (env, argv) => {
                                 // Optional: Disable attribute processing if causing issues
                                 // sources: false,
                             },
+                        },
+                    ],
+                },
+                {
+                    // Markdown blog posts → convert to HTML, then process includes, then html-loader
+                    test: /\.md$/i,
+                    use: [
+                        {
+                            loader: "posthtml-loader",
+                            options: {
+                                plugins: [require("posthtml-include")({ root: path.resolve(__dirname, "src") })],
+                            },
+                        },
+                        {
+                            loader: "html-loader",
+                        },
+                        {
+                            loader: path.resolve(__dirname, "loaders/markdown-to-html.js"),
                         },
                     ],
                 },

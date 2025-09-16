@@ -1,11 +1,8 @@
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
+const fs = require("fs");
+const path = require("path");
+const matter = require("gray-matter");
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-export default function blogPostsPlugin() {
+module.exports = function blogPostsPlugin() {
     return function (tree) {
         const blogDir = path.resolve(__dirname, "src/blog");
         const blogPosts = [];
@@ -15,10 +12,10 @@ export default function blogPostsPlugin() {
             const files = fs.readdirSync(blogDir);
 
             files.forEach((file) => {
-                if (file.endsWith(".html")) {
-                    const filePath = path.join(blogDir, file);
-                    const content = fs.readFileSync(filePath, "utf8");
+                const filePath = path.join(blogDir, file);
+                const content = fs.readFileSync(filePath, "utf8");
 
+                if (file.endsWith(".html")) {
                     // Extract metadata from standard schemas
                     // Priority: Open Graph > Twitter > Standard meta > Schema.org JSON-LD
 
@@ -88,6 +85,38 @@ export default function blogPostsPlugin() {
                             readTime: readTime,
                             filename: file,
                             url: `blog/${file}`,
+                        });
+                    }
+                }
+
+                if (file.endsWith(".md")) {
+                    // Parse front matter
+                    const { data } = matter(content);
+                    const title = data.title;
+                    const summary = data.description || data.summary;
+                    const date = data.published_time || data.date;
+                    const author = data.author || "Unknown";
+                    const tags = Array.isArray(data.tags)
+                        ? data.tags
+                        : typeof data.tags === "string"
+                          ? data.tags
+                                .split(",")
+                                .map((t) => t.trim())
+                                .filter(Boolean)
+                          : [];
+                    const readTime = data.readTime || data.read_time || "";
+
+                    if (title && summary && date) {
+                        const base = path.basename(file, path.extname(file));
+                        blogPosts.push({
+                            title,
+                            summary,
+                            date,
+                            author,
+                            tags,
+                            readTime,
+                            filename: `${base}.html`,
+                            url: `blog/${base}.html`,
                         });
                     }
                 }
@@ -173,8 +202,7 @@ export default function blogPostsPlugin() {
                         tag: "a",
                         attrs: {
                             href: post.url,
-                            class:
-                                "group glass-card rounded-md px-4 py-3 shadow-premium flex items-center justify-between gap-4 hover:bg-gray-50/70 dark:hover:bg-gray-800/70 transition-colors cursor-pointer no-underline",
+                            class: "group glass-card rounded-md px-4 py-3 shadow-premium flex items-center justify-between gap-4 hover:bg-gray-50/70 dark:hover:bg-gray-800/70 transition-colors cursor-pointer no-underline",
                         },
                         content: [
                             {
@@ -192,7 +220,9 @@ export default function blogPostsPlugin() {
                                 content: [
                                     {
                                         tag: "p",
-                                        attrs: { class: "truncate text-sm font-medium text-gray-900 dark:text-gray-100" },
+                                        attrs: {
+                                            class: "truncate text-sm font-medium text-gray-900 dark:text-gray-100",
+                                        },
                                         content: post.title,
                                     },
                                 ],
@@ -200,8 +230,7 @@ export default function blogPostsPlugin() {
                             {
                                 tag: "span",
                                 attrs: {
-                                    class:
-                                        "shrink-0 text-blue-700 dark:text-blue-300 group-hover:underline text-sm font-medium",
+                                    class: "shrink-0 text-blue-700 dark:text-blue-300 group-hover:underline text-sm font-medium",
                                 },
                                 content: "Read More →",
                             },
@@ -214,4 +243,4 @@ export default function blogPostsPlugin() {
 
         return tree;
     };
-}
+};
