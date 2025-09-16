@@ -130,7 +130,7 @@ module.exports = function blogPostsPlugin() {
 
         // Limit to latest 6 posts for the landing page
         const latestPosts = blogPosts.slice(0, 6);
-        const latestCompactPosts = blogPosts.slice(0, 3);
+        const latestCompactPosts = blogPosts.slice(0, 6);
 
         // Find the blog section and populate it
         tree.walk((node) => {
