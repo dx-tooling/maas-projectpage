@@ -116,7 +116,7 @@ module.exports = function markdownToHtmlLoader(source) {
             )}</h1>
             ${description ? `<p class="text-xl text-gray-600 dark:text-gray-300 leading-relaxed">${escapeHtml(description)}</p>` : ""}
         </header>
-        <article class="prose prose-lg dark:prose-invert max-w-none prose-headings:font-extrabold prose-h1:text-4xl prose-h2:text-3xl prose-h3:text-2xl prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-a:text-blue-600 dark:prose-a:text-blue-400 hover:prose-a:underline prose-strong:text-gray-900 dark:prose-strong:text-gray-100 prose-li:marker:text-gray-400 dark:prose-li:marker:text-gray-500 prose-pre:bg-gray-100 dark:prose-pre:bg-gray-800 prose-code:text-pink-600 dark:prose-code:text-pink-400">
+        <article class="prose prose-lg dark:prose-invert max-w-none prose-headings:font-extrabold prose-h1:text-4xl prose-h2:text-3xl prose-h3:text-2xl prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-a:text-blue-600 dark:prose-a:text-blue-400 hover:prose-a:underline prose-strong:text-gray-900 dark:prose-strong:text-gray-100 prose-li:marker:text-gray-400 dark:prose-li:marker:text-gray-500 prose-pre:bg-gray-100 dark:prose-pre:bg-gray-800 prose-pre:text-gray-800 dark:prose-pre:text-gray-200 prose-code:text-gray-800 dark:prose-code:text-gray-200">
             ${rendered}
         </article>
         <footer class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
