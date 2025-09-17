@@ -47,4 +47,10 @@ export default [
             },
         },
     },
+    {
+        files: ["posthtml-blog-posts.js", "loaders/markdown-to-html.js"],
+        rules: {
+            "@typescript-eslint/no-require-imports": "off",
+        },
+    },
 ];
